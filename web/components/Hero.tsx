@@ -43,26 +43,23 @@ export default function Hero({
   return (
     <section className="relative min-h-screen overflow-hidden bg-celestial grain">
       {/* Layer 1 — full-bleed video background.
-          Centered + min-w-full min-h-full guarantees the video COVERS the
-          hero regardless of aspect ratio mismatch (portrait phone vs
-          landscape desktop vs ultra-wide). */}
-      <video
-        src={videoSrc}
-        poster={useBanner ? bannerSrc : undefined}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-hidden="true"
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full max-w-none pointer-events-none"
-        style={{
-          width: "auto",
-          height: "auto",
-          objectFit: "cover",
-          objectPosition: "center center",
-        }}
-      />
+          object-position anchors the earth/bright portion at the top
+          (the video starts in dark space — we crop that out via position
+          + a gentle scale so the whole hero reads as illuminated earth). */}
+      <div className="absolute inset-0">
+        <video
+          src={videoSrc}
+          poster={useBanner ? bannerSrc : undefined}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          className="w-full h-full object-cover pointer-events-none"
+          style={{ objectPosition: "center 75%", transform: "scale(1.15)" }}
+        />
+      </div>
 
       {/* Layer 3 — globe (only renders if banner fails / isn't set) */}
       {!useBanner && (
@@ -72,7 +69,7 @@ export default function Hero({
       )}
 
       {/* Layer 4 — light uniform scrim for text contrast only */}
-      <div className="absolute inset-0 bg-indigo-deep/40 pointer-events-none" />
+      <div className="absolute inset-0 bg-indigo-deep/25 pointer-events-none" />
 
       {/* Content */}
       <div className="relative mx-auto max-w-4xl px-6 md:px-10 pt-36 md:pt-44 pb-24 min-h-screen flex flex-col items-center justify-center text-center">
