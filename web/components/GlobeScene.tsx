@@ -1,123 +1,223 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import createGlobe from "cobe";
+import { useMemo, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Stars } from "@react-three/drei";
+import * as THREE from "three";
+import { createNoise3D } from "simplex-noise";
+import MissionArcs from "./MissionArcs";
 
 /* ============================================================
-   OMI Globe — cobe-powered dotted world map
-   - Ships with an equirectangular world map baked in
-   - Brand-colored: Heritage Gold dots on Deep Indigo sphere,
-     Mission Teal atmosphere, Bright Gold markers
-   - San Antonio pulses as the SABWB home base
+   Dotted Globe — procedural continents via 3D simplex noise.
+   Gold land dots + teal ocean stipple on a deep-indigo sphere,
+   wrapped in a teal fresnel atmosphere glow.
    ============================================================ */
 
-type Marker = { location: [number, number]; size: number };
+function DottedGlobe() {
+  const group = useRef<THREE.Group>(null);
 
-const MISSION_MARKERS: Marker[] = [
-  { location: [29.4241, -98.4936], size: 0.12 }, // San Antonio — SABWB
-  { location: [6.5244, 3.3792],    size: 0.06 }, // Lagos
-  { location: [-1.2921, 36.8219],  size: 0.06 }, // Nairobi
-  { location: [19.4326, -99.1332], size: 0.06 }, // Mexico City
-  { location: [28.6139, 77.2090],  size: 0.06 }, // Delhi
-  { location: [-23.5505, -46.6333], size: 0.06 }, // São Paulo
-  { location: [13.7563, 100.5018], size: 0.06 }, // Bangkok
-];
+  const { landPositions, seaPositions } = useMemo(() => {
+    const noise3D = createNoise3D(() => 0.42);
+    const DOT_COUNT = 7000;
+    const RADIUS = 1;
+    const phi = Math.PI * (Math.sqrt(5) - 1);
 
-export default function GlobeScene() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const pointerInteracting = useRef<number | null>(null);
-  const pointerInteractionMovement = useRef(0);
+    const land: number[] = [];
+    const sea: number[] = [];
 
-  useEffect(() => {
-    if (!canvasRef.current) return;
+    for (let i = 0; i < DOT_COUNT; i++) {
+      const y = 1 - (i / (DOT_COUNT - 1)) * 2;
+      const r = Math.sqrt(1 - y * y);
+      const theta = phi * i;
+      const x = Math.cos(theta) * r;
+      const z = Math.sin(theta) * r;
 
-    let phi = 0;
-    let width = 0;
-    const onResize = () => {
-      if (canvasRef.current) width = canvasRef.current.offsetWidth;
-    };
-    window.addEventListener("resize", onResize);
-    onResize();
+      const freq = 1.8;
+      const n1 = noise3D(x * freq, y * freq, z * freq);
+      const n2 = noise3D(x * freq * 2.1, y * freq * 2.1, z * freq * 2.1) * 0.5;
+      const n3 = noise3D(x * freq * 4.3, y * freq * 4.3, z * freq * 4.3) * 0.25;
+      const n = n1 + n2 + n3;
 
-    const globeOptions: Parameters<typeof createGlobe>[1] = {
-      devicePixelRatio: Math.min(window.devicePixelRatio, 2),
-      width: width * 2,
-      height: width * 2,
-      phi: 0,
-      theta: 0.28,
-      dark: 1,
-      diffuse: 1.4,
-      mapSamples: 18000,
-      mapBrightness: 7,
-      mapBaseBrightness: 0.15,
-      baseColor:   [0.09, 0.14, 0.27],
-      markerColor: [0.95, 0.78, 0.29],
-      glowColor:   [0.09, 0.64, 0.76],
-      markers: MISSION_MARKERS,
-      onRender: (state: Record<string, number>) => {
-        if (!pointerInteracting.current) {
-          phi += 0.003;
-        }
-        state.phi = phi + pointerInteractionMovement.current;
-        state.width = width * 2;
-        state.height = width * 2;
-      },
-    } as Parameters<typeof createGlobe>[1];
-
-    const globe = createGlobe(canvasRef.current, globeOptions);
-
-    // Small mouse-parallax: drag to spin
-    const onPointerDown = (e: PointerEvent) => {
-      pointerInteracting.current = e.clientX - pointerInteractionMovement.current;
-      if (canvasRef.current) canvasRef.current.style.cursor = "grabbing";
-    };
-    const onPointerUp = () => {
-      pointerInteracting.current = null;
-      if (canvasRef.current) canvasRef.current.style.cursor = "grab";
-    };
-    const onPointerMove = (e: PointerEvent) => {
-      if (pointerInteracting.current !== null) {
-        const delta = e.clientX - pointerInteracting.current;
-        pointerInteractionMovement.current = delta * 0.006;
+      if (n > 0.18) {
+        land.push(x * RADIUS, y * RADIUS, z * RADIUS);
+      } else {
+        sea.push(x * RADIUS, y * RADIUS, z * RADIUS);
       }
-    };
+    }
 
-    const canvas = canvasRef.current;
-    canvas.addEventListener("pointerdown", onPointerDown);
-    canvas.addEventListener("pointerup", onPointerUp);
-    canvas.addEventListener("pointerout", onPointerUp);
-    canvas.addEventListener("mousemove", onPointerMove as EventListener);
-    canvas.style.cursor = "grab";
-
-    // Fade-in once cobe is ready
-    setTimeout(() => {
-      if (canvasRef.current) canvasRef.current.style.opacity = "1";
-    }, 50);
-
-    return () => {
-      globe.destroy();
-      window.removeEventListener("resize", onResize);
-      canvas.removeEventListener("pointerdown", onPointerDown);
-      canvas.removeEventListener("pointerup", onPointerUp);
-      canvas.removeEventListener("pointerout", onPointerUp);
-      canvas.removeEventListener("mousemove", onPointerMove as EventListener);
+    return {
+      landPositions: new Float32Array(land),
+      seaPositions: new Float32Array(sea),
     };
   }, []);
 
+  const meridians = useMemo(() => buildMeridians(), []);
+
+  useFrame((_, delta) => {
+    if (group.current) {
+      group.current.rotation.y += delta * 0.08;
+    }
+  });
+
   return (
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className="relative w-full max-w-[900px] aspect-square">
-        <canvas
-          ref={canvasRef}
-          style={{
-            width: "100%",
-            height: "100%",
-            contain: "layout paint size",
-            opacity: 0,
-            transition: "opacity 1s cubic-bezier(0.22, 1, 0.36, 1)",
-          }}
+    <group ref={group} rotation={[0.41, 0, 0]}>
+      <mesh>
+        <sphereGeometry args={[0.985, 64, 64]} />
+        <meshStandardMaterial
+          color="#0B1F3D"
+          roughness={1}
+          metalness={0}
+          emissive="#0B1F3D"
+          emissiveIntensity={0.25}
         />
-      </div>
-    </div>
+      </mesh>
+
+      <points>
+        <bufferGeometry>
+          <bufferAttribute attach="attributes-position" args={[seaPositions, 3]} />
+        </bufferGeometry>
+        <pointsMaterial
+          size={0.007}
+          color="#17A4C2"
+          transparent
+          opacity={0.22}
+          sizeAttenuation
+          depthWrite={false}
+        />
+      </points>
+
+      <points>
+        <bufferGeometry>
+          <bufferAttribute attach="attributes-position" args={[landPositions, 3]} />
+        </bufferGeometry>
+        <pointsMaterial
+          size={0.014}
+          color="#F2C54A"
+          transparent
+          opacity={0.97}
+          sizeAttenuation
+          depthWrite={false}
+        />
+      </points>
+
+      {meridians.map((obj, i) => (
+        <primitive key={i} object={obj} />
+      ))}
+
+      <MissionArcs />
+    </group>
+  );
+}
+
+function buildMeridians(): THREE.Line[] {
+  const segments = 128;
+  const material = new THREE.LineBasicMaterial({
+    color: 0xd4a24c,
+    transparent: true,
+    opacity: 0.14,
+    depthWrite: false,
+  });
+
+  const items: THREE.Line[] = [];
+
+  for (let i = 0; i < 6; i++) {
+    const pts: number[] = [];
+    for (let s = 0; s <= segments; s++) {
+      const t = (s / segments) * Math.PI * 2;
+      pts.push(Math.cos(t) * 1.001, Math.sin(t) * 1.001, 0);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.Float32BufferAttribute(pts, 3));
+    const line = new THREE.Line(geo, material);
+    line.rotation.y = (i / 6) * Math.PI;
+    items.push(line);
+  }
+
+  for (const lat of [0, Math.PI / 4, -Math.PI / 4]) {
+    const r = Math.cos(lat);
+    const y = Math.sin(lat);
+    const pts: number[] = [];
+    for (let s = 0; s <= segments; s++) {
+      const t = (s / segments) * Math.PI * 2;
+      pts.push(Math.cos(t) * r * 1.001, y * 1.001, Math.sin(t) * r * 1.001);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.Float32BufferAttribute(pts, 3));
+    items.push(new THREE.Line(geo, material));
+  }
+
+  return items;
+}
+
+function Atmosphere() {
+  const material = useMemo(
+    () =>
+      new THREE.ShaderMaterial({
+        uniforms: {
+          glowColor: { value: new THREE.Color("#17A4C2") },
+          intensity: { value: 1.35 },
+        },
+        vertexShader: `
+          varying vec3 vNormal;
+          varying vec3 vPositionNormal;
+          void main() {
+            vNormal = normalize(normalMatrix * normal);
+            vPositionNormal = normalize((modelViewMatrix * vec4(position, 1.0)).xyz);
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }
+        `,
+        fragmentShader: `
+          uniform vec3 glowColor;
+          uniform float intensity;
+          varying vec3 vNormal;
+          varying vec3 vPositionNormal;
+          void main() {
+            float fresnel = pow(1.0 - abs(dot(vNormal, vPositionNormal)), 2.2);
+            gl_FragColor = vec4(glowColor, fresnel * intensity);
+          }
+        `,
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        side: THREE.BackSide,
+        depthWrite: false,
+      }),
+    []
+  );
+
+  return (
+    <mesh scale={1.22}>
+      <sphereGeometry args={[1, 64, 64]} />
+      <primitive object={material} attach="material" />
+    </mesh>
+  );
+}
+
+/* ============================================================
+   Scene — camera pulled in closer so the globe feels LARGE
+   ============================================================ */
+
+export default function GlobeScene() {
+  return (
+    <Canvas
+      camera={{ position: [0, 0, 2.3], fov: 42 }}
+      gl={{ antialias: true, alpha: true }}
+      dpr={[1, 2]}
+    >
+      <ambientLight intensity={0.45} />
+      <directionalLight position={[5, 3, 5]} intensity={1.25} color="#F2C54A" />
+      <directionalLight position={[-3, -2, -5]} intensity={0.4} color="#17A4C2" />
+
+      <Stars
+        radius={60}
+        depth={50}
+        count={2500}
+        factor={3}
+        saturation={0}
+        fade
+        speed={0.6}
+      />
+      <Atmosphere />
+      <DottedGlobe />
+    </Canvas>
   );
 }

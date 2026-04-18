@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    optimizePackageImports: ['framer-motion'],
+    optimizePackageImports: ['@react-three/drei', 'framer-motion'],
   },
 };
 
