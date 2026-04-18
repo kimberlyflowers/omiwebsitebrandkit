@@ -1,0 +1,115 @@
+/* ============================================================
+   Outpouring Missions International — Typography Tokens
+
+   Fonts (all free via Google Fonts · SIL Open Font License):
+     - Montserrat      : display, wordmark, headlines
+     - Inter           : body + UI
+     - Archivo Black   : YES sub-brand (italicized)
+     - Saira Condensed : YES alt / athletic treatments
+     - Kaushan Script  : tagline "Igniting Futures."
+     - JetBrains Mono  : technical
+
+   Embed in <head>:
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Archivo+Black&family=Saira+Condensed:wght@900&family=Kaushan+Script&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+   ============================================================ */
+
+:root {
+  /* Font families */
+  --font-display:  "Montserrat", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-body:     "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-athletic: "Archivo Black", "Saira Condensed", Impact, sans-serif;
+  --font-script:   "Kaushan Script", "Brush Script MT", cursive;
+  --font-mono:     "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Weights */
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-extrabold:800;
+  --weight-black:    900;
+
+  /* Scale — desktop, 16px base */
+  --fs-display-xl: 4.5rem;   /* 72 */
+  --fs-display-lg: 3.5rem;   /* 56 */
+  --fs-h1:         2.75rem;  /* 44 */
+  --fs-h2:         2rem;     /* 32 */
+  --fs-h3:         1.5rem;   /* 24 */
+  --fs-h4:         1.25rem;  /* 20 */
+  --fs-body-lg:    1.125rem; /* 18 */
+  --fs-body:       1rem;     /* 16 */
+  --fs-body-sm:    0.875rem; /* 14 */
+  --fs-label:      0.75rem;  /* 12 */
+
+  --lh-tight:   1.1;
+  --lh-snug:    1.25;
+  --lh-normal:  1.5;
+  --lh-relaxed: 1.65;
+
+  --track-tight:   -0.01em;
+  --track-normal:  0;
+  --track-wide:    0.08em;
+  --track-wider:   0.2em;
+}
+
+/* Base */
+html { font-family: var(--font-body); font-size: 16px; }
+body { font-family: var(--font-body); font-weight: var(--weight-regular); line-height: var(--lh-normal); }
+
+/* Display / Headings — Montserrat */
+.omi-display-xl { font-family: var(--font-display); font-weight: var(--weight-black);      font-size: var(--fs-display-xl); line-height: var(--lh-tight); letter-spacing: var(--track-tight); }
+.omi-display-lg { font-family: var(--font-display); font-weight: var(--weight-extrabold);  font-size: var(--fs-display-lg); line-height: var(--lh-tight); letter-spacing: var(--track-tight); }
+.omi-h1 { font-family: var(--font-display); font-weight: var(--weight-extrabold); font-size: var(--fs-h1); line-height: var(--lh-snug); letter-spacing: var(--track-tight); }
+.omi-h2 { font-family: var(--font-display); font-weight: var(--weight-bold);      font-size: var(--fs-h2); line-height: var(--lh-snug); }
+.omi-h3 { font-family: var(--font-display); font-weight: var(--weight-bold);      font-size: var(--fs-h3); line-height: var(--lh-snug); }
+.omi-h4 { font-family: var(--font-display); font-weight: var(--weight-semibold);  font-size: var(--fs-h4); line-height: var(--lh-snug); }
+
+/* Body — Inter */
+.omi-body-lg { font-size: var(--fs-body-lg); line-height: var(--lh-relaxed); }
+.omi-body    { font-size: var(--fs-body);    line-height: var(--lh-normal); }
+.omi-body-sm { font-size: var(--fs-body-sm); line-height: var(--lh-normal); }
+
+/* Eyebrow — Montserrat 600 tracked */
+.omi-eyebrow {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: var(--fs-label);
+  text-transform: uppercase;
+  letter-spacing: var(--track-wide);
+}
+
+/* Wordmark subtitle style — matches "MISSIONS INTERNATIONAL" */
+.omi-subtitle {
+  font-family: var(--font-display);
+  font-weight: var(--weight-regular);
+  text-transform: uppercase;
+  letter-spacing: var(--track-wider);
+}
+
+/* Athletic — YES sub-brand */
+.omi-athletic {
+  font-family: var(--font-athletic);
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+/* Tagline flourish — "Igniting Futures." */
+.omi-tagline {
+  font-family: var(--font-script);
+  font-weight: 400;
+  color: var(--omi-gold-heritage);
+}
+
+/* Fluid typography (mobile) */
+@media (max-width: 768px) {
+  :root {
+    --fs-display-xl: 3rem;   /* 48 */
+    --fs-display-lg: 2.5rem; /* 40 */
+    --fs-h1:         2rem;   /* 32 */
+    --fs-h2:         1.5rem; /* 24 */
+    --fs-h3:         1.25rem;/* 20 */
+  }
+}
