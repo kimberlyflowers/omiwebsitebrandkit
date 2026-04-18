@@ -43,17 +43,20 @@ export default function Hero({
   return (
     <section className="relative min-h-screen overflow-hidden bg-celestial grain">
       {/* Layer 1 — video is the primary background; image is poster / fallback */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        src={videoSrc}
-        poster={useBanner ? bannerSrc : undefined}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-hidden="true"
-      />
+      <div className="absolute inset-0 overflow-hidden">
+        <video
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          style={{ objectPosition: "center center" }}
+          src={videoSrc}
+          poster={useBanner ? bannerSrc : undefined}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+        />
+      </div>
 
       {/* Layer 3 — globe (only renders if banner fails / isn't set) */}
       {!useBanner && (
@@ -62,9 +65,8 @@ export default function Hero({
         </div>
       )}
 
-      {/* Layer 4 — indigo gradient scrim so text stays legible over the banner */}
-      <div className="absolute inset-0 bg-gradient-to-b from-indigo-deep/30 via-indigo-deep/55 to-indigo-deep" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(11,31,61,0.45)_65%,rgba(11,31,61,0.9)_100%)]" />
+      {/* Layer 4 — lighter scrim so the video is the star; keeps text legible */}
+      <div className="absolute inset-0 bg-gradient-to-b from-indigo-deep/30 via-indigo-deep/10 to-indigo-deep/80 pointer-events-none" />
 
       {/* Content */}
       <div className="relative mx-auto max-w-4xl px-6 md:px-10 pt-36 md:pt-44 pb-24 min-h-screen flex flex-col items-center justify-center text-center">
