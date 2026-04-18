@@ -1,0 +1,155 @@
+@import "../../brand/tokens/colors.css";
+@import "../../brand/tokens/spacing.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -------- Base -------- */
+html {
+  scroll-behavior: smooth;
+  background: var(--omi-indigo-deep);
+  color: var(--omi-white);
+}
+
+body {
+  font-family: var(--font-body), system-ui, sans-serif;
+  background: var(--omi-indigo-deep);
+  color: var(--omi-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--omi-gold-heritage);
+  color: var(--omi-indigo-deep);
+}
+
+/* -------- Utility classes -------- */
+.bg-celestial {
+  background: radial-gradient(ellipse at 70% 40%, #1E3C78 0%, #152C5B 40%, #0B1F3D 75%, #070F1E 100%);
+}
+
+.bg-horizon {
+  background: linear-gradient(135deg, #0B1F3D 0%, #17A4C2 55%, #F2C54A 100%);
+}
+
+.text-gradient-sunrise {
+  background: linear-gradient(90deg, #D4A24C, #F2C54A);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.text-gradient-celestial {
+  background: linear-gradient(90deg, #FFFFFF 0%, #F2C54A 40%, #17A4C2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gradient-gold {
+  border-image: linear-gradient(90deg, transparent, #D4A24C, transparent) 1;
+}
+
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #D4A24C 50%, transparent 100%);
+  opacity: 0.6;
+}
+
+/* Eyebrow / kicker */
+.eyebrow {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--omi-gold-heritage);
+}
+
+/* Tagline script — "Igniting Futures." */
+.tagline-script {
+  font-family: var(--font-script), cursive;
+  color: var(--omi-gold-heritage);
+  line-height: 1;
+}
+
+/* Button system */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-pill);
+  transition: all var(--dur-base) var(--ease-out-expo);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #D4A24C, #F2C54A);
+  color: #0B1F3D;
+  box-shadow: 0 8px 24px rgba(212, 162, 76, 0.28);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(212, 162, 76, 0.45);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Card */
+.card {
+  background: rgba(21, 44, 91, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  transition: all var(--dur-slow) var(--ease-out-expo);
+}
+.card:hover {
+  border-color: rgba(212, 162, 76, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* Grain overlay — adds organic depth to flat indigo surfaces */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.8'/></svg>");
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
