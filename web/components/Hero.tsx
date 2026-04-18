@@ -23,6 +23,8 @@ type Props = {
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
   useBanner?: boolean;
+  bannerOverride?: string;   // from Sanity, wins if set
+  videoOverride?: string;    // from Sanity, wins if set
 };
 
 export default function Hero({
@@ -33,13 +35,17 @@ export default function Hero({
   primaryCta = { label: "Join the Next Conference", href: "/conference" },
   secondaryCta = { label: "Our Mission", href: "/about" },
   useBanner = true,
+  bannerOverride,
+  videoOverride,
 }: Props) {
+  const bannerSrc = bannerOverride || BANNER_SRC;
+  const videoSrc = videoOverride || VIDEO_SRC;
   return (
     <section className="relative min-h-screen overflow-hidden bg-celestial grain">
       {/* Layer 1 — branded banner image */}
       {useBanner && (
         <img
-          src={BANNER_SRC}
+          src={bannerSrc}
           alt="Outpouring Missions International"
           className="absolute inset-0 w-full h-full object-cover"
           onError={(e) => {
@@ -51,7 +57,7 @@ export default function Hero({
       {/* Layer 2 — conference video (if present) */}
       <video
         className="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-screen pointer-events-none"
-        src={VIDEO_SRC}
+        src={videoSrc}
         autoPlay
         muted
         loop

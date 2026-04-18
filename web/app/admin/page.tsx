@@ -16,12 +16,6 @@ const TOOLS = [
     status: "Live" as const,
   },
   {
-    href: "/admin/builder",
-    title: "Page Builder (GrapesJS)",
-    desc: "Drag-and-drop sandbox preloaded with OMI brand blocks. Export HTML/CSS for one-way sync into React.",
-    status: "Live" as const,
-  },
-  {
     href: "#",
     title: "Registrations",
     desc: "Event registration list, payment status, attendee notes. Powered by Stripe.",

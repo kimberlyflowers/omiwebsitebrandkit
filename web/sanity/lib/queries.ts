@@ -131,3 +131,45 @@ export async function fetchMinistries() {
     return [];
   }
 }
+
+/* ------------------------------------------------------------
+   Singletons: siteSettings, homePage, aboutPage
+   ------------------------------------------------------------ */
+
+export const siteSettingsQuery = groq`*[_type == "siteSettings"][0] {
+  organizationName, shortName, tagline, pillars, foundedYear,
+  contactEmail, city,
+  socialLinks[] { platform, url },
+  legalName, ein, sabwbActionDisclosure
+}`;
+
+export const homePageQuery = groq`*[_type == "homePage"][0] {
+  heroEyebrow, heroHeadline, heroScript, heroLede,
+  heroBanner, heroVideoUrl,
+  heroPrimaryCta, heroSecondaryCta,
+  wwdEyebrow, wwdHeadline, wwdLede,
+  wwdCards[] { num, meta, title, body, href, cta, image },
+  editorialHeadline, editorialScript, editorialBody,
+  impactStats[] { num, label },
+  ctaHeadline, ctaBody, ctaPrimary, ctaSecondary
+}`;
+
+export const aboutPageQuery = groq`*[_type == "aboutPage"][0] {
+  eyebrow, title, kicker, lede, body,
+  outro { heading, body, cta }
+}`;
+
+export async function fetchSiteSettings() {
+  if (!isSanityConfigured || !client) return null;
+  try { return await client.fetch(siteSettingsQuery); } catch { return null; }
+}
+
+export async function fetchHomePage() {
+  if (!isSanityConfigured || !client) return null;
+  try { return await client.fetch(homePageQuery); } catch { return null; }
+}
+
+export async function fetchAboutPage() {
+  if (!isSanityConfigured || !client) return null;
+  try { return await client.fetch(aboutPageQuery); } catch { return null; }
+}
