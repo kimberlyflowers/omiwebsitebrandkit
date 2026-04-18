@@ -31,21 +31,12 @@ export default function Nav() {
     >
       <div className="mx-auto max-w-container px-6 md:px-10 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative">
-            <div className="w-10 h-10 rounded-md bg-gradient-to-br from-gold-heritage to-gold-bright flex items-center justify-center shadow-omi-gold">
-              <span className="font-display font-black text-indigo-deep text-lg leading-none">O</span>
-            </div>
-            <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-6 h-px bg-gold-heritage/60 group-hover:w-10 transition-all duration-500" />
-          </div>
-          <div className="hidden sm:block leading-tight">
-            <div className="font-display font-black text-white text-sm tracking-wide">
-              OUTPOURING
-            </div>
-            <div className="font-display font-medium text-mist/70 text-[10px] tracking-[0.25em]">
-              MISSIONS INTERNATIONAL
-            </div>
-          </div>
+        <Link href="/" className="flex items-center group">
+          <img
+            src="/omi-logo.png"
+            alt="Outpouring Missions International"
+            className="h-12 md:h-14 w-auto object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
+          />
         </Link>
 
         {/* Desktop nav */}

@@ -7,18 +7,18 @@ import ImageSlot from "./ImageSlot";
 const events = [
   {
     kind: "Conference",
-    title: "Annual Outpouring Conference",
-    date: "Weekend after Mother's Day",
-    loc: "Location TBA",
-    href: "/conference",
+    title: "OMI Annual Conference 2026",
+    date: "May 15–17, 2026 · Mother's Day weekend",
+    loc: "San Antonio, TX",
+    href: "/events/2026-annual-conference",
     accent: "gold" as const,
   },
   {
     kind: "Teaching",
-    title: "Seasonal Teaching Intensive",
-    date: "Next cohort · date TBA",
+    title: "Summer Teaching Intensive",
+    date: "July 9–11, 2026",
     loc: "Hybrid · in-person + stream",
-    href: "/teachings",
+    href: "/events/summer-2026-teaching-intensive",
     accent: "teal" as const,
   },
 ];

@@ -29,18 +29,12 @@ export default function Footer() {
         <div className="grid lg:grid-cols-[1.3fr_1fr_1fr_1.3fr] gap-12 pb-14 border-b border-white/10">
           {/* Brand */}
           <div>
-            <Link href="/" className="inline-flex items-center gap-3 group">
-              <div className="w-11 h-11 rounded-md bg-gradient-to-br from-gold-heritage to-gold-bright flex items-center justify-center shadow-omi-gold">
-                <span className="font-display font-black text-indigo-deep text-lg">O</span>
-              </div>
-              <div>
-                <div className="font-display font-black text-white tracking-wide text-sm">
-                  OUTPOURING
-                </div>
-                <div className="font-display font-medium text-mist/60 text-[10px] tracking-[0.25em]">
-                  MISSIONS INTERNATIONAL
-                </div>
-              </div>
+            <Link href="/" className="inline-block group">
+              <img
+                src="/omi-logo.png"
+                alt="Outpouring Missions International"
+                className="h-20 w-auto object-contain"
+              />
             </Link>
             <p className="mt-5 text-sm text-mist/60 leading-relaxed max-w-sm">
               Empowering, equipping, and expanding the reach of faith-driven
