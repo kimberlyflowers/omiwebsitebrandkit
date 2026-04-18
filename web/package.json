@@ -10,8 +10,12 @@
   },
   "dependencies": {
     "@grapesjs/react": "^2.0.0",
+    "@portabletext/react": "^3.2.4",
     "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.18.0",
+    "@sanity/client": "^6.29.1",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^3.99.0",
     "@stripe/stripe-js": "^9.2.0",
     "@types/three": "^0.169.0",
     "framer-motion": "^11.11.0",
@@ -19,10 +23,13 @@
     "grapesjs-blocks-basic": "^1.0.2",
     "grapesjs-preset-webpage": "^1.0.3",
     "next": "14.2.15",
+    "next-sanity": "^9.12.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "sanity": "^3.99.0",
     "simplex-noise": "^4.0.3",
     "stripe": "^22.0.2",
+    "styled-components": "^6.4.0",
     "three": "^0.169.0"
   },
   "devDependencies": {

@@ -2,12 +2,15 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ImageSlot from "@/components/ImageSlot";
-import { events, type EventDetail } from "@/lib/events";
+import type { EventDetail } from "@/lib/events";
+import { listAllEvents } from "@/lib/eventSource";
 
 export const metadata = {
   title: "Events Calendar — Outpouring Missions International",
   description: "Every Outpouring gathering in one place. Click any event to learn more and register.",
 };
+
+export const revalidate = 60;
 
 /* ------------------------------------------------------------
    Sort & group events by month for a calendar-style listing.
@@ -60,7 +63,8 @@ const KIND_ACCENT: Record<EventDetail["kind"], { bar: string; badge: string; chi
   },
 };
 
-export default function EventsCalendar() {
+export default async function EventsCalendar() {
+  const events = await listAllEvents();
   const groups = groupByMonth(events);
 
   return (

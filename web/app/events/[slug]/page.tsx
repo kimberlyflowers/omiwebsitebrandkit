@@ -1,13 +1,16 @@
 import { notFound } from "next/navigation";
 import EventPage from "@/components/EventPage";
-import { events, getEvent } from "@/lib/events";
+import { listAllEvents, getEventBySlug } from "@/lib/eventSource";
+
+export const revalidate = 60;
 
 export async function generateStaticParams() {
+  const events = await listAllEvents();
   return events.map((e) => ({ slug: e.slug }));
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const ev = getEvent(params.slug);
+  const ev = await getEventBySlug(params.slug);
   if (!ev) return { title: "Event not found — OMI" };
   return {
     title: `${ev.title} — OMI`,
@@ -15,8 +18,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default function Event({ params }: { params: { slug: string } }) {
-  const event = getEvent(params.slug);
+export default async function Event({ params }: { params: { slug: string } }) {
+  const event = await getEventBySlug(params.slug);
   if (!event) notFound();
   return <EventPage event={event} />;
 }
