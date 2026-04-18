@@ -42,27 +42,16 @@ export default function Hero({
   const videoSrc = videoOverride || VIDEO_SRC;
   return (
     <section className="relative min-h-screen overflow-hidden bg-celestial grain">
-      {/* Layer 1 — branded banner image */}
-      {useBanner && (
-        <img
-          src={bannerSrc}
-          alt="Outpouring Missions International"
-          className="absolute inset-0 w-full h-full object-cover"
-          onError={(e) => {
-            (e.currentTarget as HTMLImageElement).style.display = "none";
-          }}
-        />
-      )}
-
-      {/* Layer 2 — conference video (if present) */}
+      {/* Layer 1 — video is the primary background; image is poster / fallback */}
       <video
-        className="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-screen pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         src={videoSrc}
+        poster={useBanner ? bannerSrc : undefined}
         autoPlay
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
         aria-hidden="true"
       />
 
