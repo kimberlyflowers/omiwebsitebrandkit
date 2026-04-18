@@ -7,7 +7,7 @@ const navCols = [
     links: [
       { href: "/about", label: "About OMI" },
       { href: "/conference", label: "Annual Conference" },
-      { href: "/teachings", label: "Seasonal Teachings" },
+      { href: "/events", label: "Events Calendar" },
       { href: "/commentary", label: "Cultural Commentary" },
     ],
   },

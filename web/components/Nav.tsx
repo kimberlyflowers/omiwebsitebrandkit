@@ -7,7 +7,7 @@ import { ministries } from "@/lib/ministries";
 const primary = [
   { href: "/about", label: "About" },
   { href: "/conference", label: "Conference" },
-  { href: "/teachings", label: "Teachings" },
+  { href: "/events", label: "Events" },
   { href: "/commentary", label: "Commentary" },
 ];
 
