@@ -1,13 +1,15 @@
 import StubPage from "@/components/StubPage";
 
-export const metadata = { title: "SABWB — OMI" };
+export const metadata = { title: "SABWB — San Antonio Black White and Brown" };
 
 export default function SABWB() {
   return (
     <StubPage
-      eyebrow="SABWB"
-      title="Community, conviction, and calling."
-      lede="The movement where teaching becomes community — gathering, growing, and going together."
+      eyebrow="SABWB · San Antonio Black White and Brown"
+      title="One city. One calling."
+      script="Across color lines."
+      lede="SABWB gathers San Antonio's Black, White, and Brown communities around the shared conviction that unity is a witness. Teaching, worship, and presence — together."
+      notice="Visit sabwb.org for current programs"
     />
   );
 }

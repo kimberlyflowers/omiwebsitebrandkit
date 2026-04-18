@@ -1,10 +1,12 @@
 export type Ministry = {
   slug: string;
   name: string;
+  fullName?: string;
   short: string;
   tagline: string;
   accent: "teal" | "electric" | "gold" | "indigo" | "action";
   legalBadge?: string;
+  externalUrl?: string;
 };
 
 export const ministries: Ministry[] = [
@@ -32,13 +34,16 @@ export const ministries: Ministry[] = [
   {
     slug: "sabwb",
     name: "SABWB",
-    short: "The mission movement",
-    tagline: "Community, conviction, and calling.",
+    fullName: "San Antonio Black White and Brown",
+    short: "San Antonio Black White and Brown",
+    tagline: "Community across color lines — one city, one calling.",
     accent: "indigo",
+    externalUrl: "https://www.sabwb.org",
   },
   {
     slug: "sabwb-action",
     name: "SABWB Action",
+    fullName: "San Antonio Black White and Brown Action",
     short: "Civic engagement · 501(c)(4)",
     tagline: "Faithful voices in the public square.",
     accent: "action",
