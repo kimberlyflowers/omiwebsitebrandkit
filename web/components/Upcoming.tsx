@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import ImageSlot from "./ImageSlot";
 
 const events = [
   {
@@ -59,9 +60,16 @@ export default function Upcoming() {
             >
               <Link
                 href={e.href}
-                className="group block p-8 md:p-10 relative overflow-hidden rounded-lg bg-white border border-mist shadow-omi-sm hover:shadow-omi-lg hover:border-gold-heritage/40 hover:-translate-y-1 transition-all duration-500"
+                className="group block relative overflow-hidden rounded-lg bg-white border border-mist shadow-omi-sm hover:shadow-omi-lg hover:border-gold-heritage/40 hover:-translate-y-1 transition-all duration-500"
               >
-                <div className={`absolute top-0 left-0 h-1 w-full ${accentBar[e.accent]}`} />
+                <div className={`absolute top-0 left-0 h-1 w-full z-10 ${accentBar[e.accent]}`} />
+                <ImageSlot
+                  ratio="aspect-[21/9]"
+                  tone="light"
+                  caption={`${e.title} photo`}
+                  id={`home-upcoming-${e.accent}`}
+                />
+                <div className="p-8 md:p-10">
                 <div className="eyebrow text-graphite/60 mb-4">{e.kind}</div>
                 <h3 className="font-display font-bold text-indigo-deep text-2xl md:text-3xl leading-tight mb-6">
                   {e.title}
@@ -83,6 +91,7 @@ export default function Upcoming() {
                 </div>
                 <div className="mt-8 text-sm font-display font-semibold text-indigo-deep group-hover:text-gold-heritage transition-colors">
                   Learn more →
+                </div>
                 </div>
               </Link>
             </motion.div>

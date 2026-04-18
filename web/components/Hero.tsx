@@ -4,19 +4,47 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Globe from "./Globe";
 
+/**
+ * Conference video backdrop
+ * -------------------------
+ * Drop a file into `/web/public/conference-reel.mp4` and it'll auto-play
+ * behind the globe at ~25% opacity with a teal screen-blend. If the file
+ * is missing, the <video> stays invisible and the hero still looks right.
+ *
+ * Recommended clip: 8–15s loop, 1920x1080, H.264, <4 MB, no audio.
+ */
+const VIDEO_SRC = "/conference-reel.mp4";
+const VIDEO_POSTER = "/conference-poster.jpg"; // optional still frame
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-celestial grain">
-      {/* Globe fills the whole hero as a backdrop */}
+      {/* Layer 1 — video backdrop (only shows if the file exists) */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-screen pointer-events-none"
+        src={VIDEO_SRC}
+        poster={VIDEO_POSTER}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+      />
+
+      {/* Layer 2 — indigo wash to keep the globe dominant */}
+      <div className="absolute inset-0 bg-gradient-to-b from-indigo-deep/60 via-indigo-deep/30 to-indigo-deep/80" />
+
+      {/* Layer 3 — globe */}
       <div className="absolute inset-0">
         <Globe />
       </div>
 
-      {/* Soft vignette so centered text stays legible over the globe */}
+      {/* Layer 4 — centered vignette for text legibility */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(11,31,61,0.55)_55%,rgba(11,31,61,0.92)_100%)]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-indigo-deep/70 via-transparent to-indigo-deep" />
+      <div className="absolute inset-0 bg-gradient-to-b from-indigo-deep/40 via-transparent to-indigo-deep" />
 
-      {/* Centered content */}
+      {/* Layer 5 — content */}
       <div className="relative mx-auto max-w-4xl px-6 md:px-10 pt-36 md:pt-44 pb-24 min-h-screen flex flex-col items-center justify-center text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -69,7 +97,6 @@ export default function Hero() {
           </Link>
         </motion.div>
 
-        {/* Pillar strip */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -90,7 +117,6 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

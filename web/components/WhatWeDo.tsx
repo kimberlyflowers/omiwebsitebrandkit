@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import ImageSlot from "./ImageSlot";
 
 const pillars = [
   {
@@ -66,23 +67,31 @@ export default function WhatWeDo() {
             >
               <Link
                 href={p.href}
-                className="group block h-full p-8 md:p-10 rounded-lg bg-white border border-mist shadow-omi-sm hover:shadow-omi-lg hover:border-gold-heritage/40 hover:-translate-y-1 transition-all duration-500"
+                className="group block h-full rounded-lg bg-white border border-mist shadow-omi-sm hover:shadow-omi-lg hover:border-gold-heritage/40 hover:-translate-y-1 transition-all duration-500 overflow-hidden"
               >
-                <div className="flex items-start justify-between mb-8">
-                  <span className="font-display font-black text-gold-heritage text-2xl">
-                    {p.num}
-                  </span>
-                  <span className="text-gold-heritage opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-500">
-                    →
-                  </span>
-                </div>
-                <div className="eyebrow text-teal-mission mb-3">{p.meta}</div>
-                <h3 className="font-display font-bold text-indigo-deep text-2xl md:text-[1.75rem] leading-tight mb-4">
-                  {p.title}
-                </h3>
-                <p className="text-graphite/80 leading-relaxed">{p.body}</p>
-                <div className="mt-8 pt-6 border-t border-mist text-sm font-display font-semibold text-indigo-deep group-hover:text-gold-heritage transition-colors">
-                  {p.cta}
+                <ImageSlot
+                  ratio="aspect-[16/10]"
+                  tone="light"
+                  caption={`${p.title} photo`}
+                  id={`home-whatwedo-${p.num}`}
+                />
+                <div className="p-8 md:p-10">
+                  <div className="flex items-start justify-between mb-6">
+                    <span className="font-display font-black text-gold-heritage text-2xl">
+                      {p.num}
+                    </span>
+                    <span className="text-gold-heritage opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-500">
+                      →
+                    </span>
+                  </div>
+                  <div className="eyebrow text-teal-mission mb-3">{p.meta}</div>
+                  <h3 className="font-display font-bold text-indigo-deep text-2xl md:text-[1.75rem] leading-tight mb-4">
+                    {p.title}
+                  </h3>
+                  <p className="text-graphite/80 leading-relaxed">{p.body}</p>
+                  <div className="mt-8 pt-6 border-t border-mist text-sm font-display font-semibold text-indigo-deep group-hover:text-gold-heritage transition-colors">
+                    {p.cta}
+                  </div>
                 </div>
               </Link>
             </motion.div>
