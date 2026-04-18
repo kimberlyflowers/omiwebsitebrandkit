@@ -42,21 +42,27 @@ export default function Hero({
   const videoSrc = videoOverride || VIDEO_SRC;
   return (
     <section className="relative min-h-screen overflow-hidden bg-celestial grain">
-      {/* Layer 1 — video is the primary background; image is poster / fallback */}
-      <div className="absolute inset-0 overflow-hidden">
-        <video
-          className="absolute top-0 left-0 w-full h-full object-cover"
-          style={{ objectPosition: "center center" }}
-          src={videoSrc}
-          poster={useBanner ? bannerSrc : undefined}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-        />
-      </div>
+      {/* Layer 1 — full-bleed video background.
+          Centered + min-w-full min-h-full guarantees the video COVERS the
+          hero regardless of aspect ratio mismatch (portrait phone vs
+          landscape desktop vs ultra-wide). */}
+      <video
+        src={videoSrc}
+        poster={useBanner ? bannerSrc : undefined}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full max-w-none pointer-events-none"
+        style={{
+          width: "auto",
+          height: "auto",
+          objectFit: "cover",
+          objectPosition: "center center",
+        }}
+      />
 
       {/* Layer 3 — globe (only renders if banner fails / isn't set) */}
       {!useBanner && (
@@ -65,8 +71,8 @@ export default function Hero({
         </div>
       )}
 
-      {/* Layer 4 — lighter scrim so the video is the star; keeps text legible */}
-      <div className="absolute inset-0 bg-gradient-to-b from-indigo-deep/30 via-indigo-deep/10 to-indigo-deep/80 pointer-events-none" />
+      {/* Layer 4 — light uniform scrim for text contrast only */}
+      <div className="absolute inset-0 bg-indigo-deep/40 pointer-events-none" />
 
       {/* Content */}
       <div className="relative mx-auto max-w-4xl px-6 md:px-10 pt-36 md:pt-44 pb-24 min-h-screen flex flex-col items-center justify-center text-center">
