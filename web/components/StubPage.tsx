@@ -14,6 +14,14 @@ type EngageBlock = {
   caption?: string;
 };
 
+type HeroImage = {
+  src?: string;
+  alt?: string;
+  caption?: string;
+  id?: string;
+  opacity?: number; // 0-100, default 65
+};
+
 type Props = {
   eyebrow: string;
   title: string;
@@ -22,6 +30,7 @@ type Props = {
   notice?: string;
   accent?: "indigo" | "gold" | "teal" | "action";
   externalLink?: ExternalLink;
+  heroImage?: HeroImage;
   overviewCards?: OverviewCard[];
   pullQuote?: string;
   pullQuoteAttribution?: string;
@@ -43,6 +52,7 @@ export default function StubPage({
   notice,
   accent = "indigo",
   externalLink,
+  heroImage,
   overviewCards,
   pullQuote = "Transforming Lives. Igniting Futures.",
   pullQuoteAttribution,
@@ -79,7 +89,33 @@ export default function StubPage({
       <Nav />
       <main>
         {/* ---------------- HERO (dark) ---------------- */}
-        <section className={`relative min-h-[70vh] ${heroGradient[accent]} grain flex items-center`}>
+        <section className={`relative min-h-[70vh] ${heroGradient[accent]} grain flex items-center overflow-hidden`}>
+          {/* Optional hero image — tinted indigo so the brand stays dominant */}
+          {heroImage && (
+            <>
+              {heroImage.src ? (
+                <img
+                  src={heroImage.src}
+                  alt={heroImage.alt ?? ""}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ opacity: (heroImage.opacity ?? 65) / 100 }}
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center p-8">
+                  <ImageSlot
+                    ratio="aspect-auto h-full"
+                    tone="dark"
+                    caption={heroImage.caption ?? "Hero image placeholder"}
+                    id={heroImage.id ?? "hero-image"}
+                    className="max-w-4xl"
+                  />
+                </div>
+              )}
+              {/* Indigo wash for tint + legibility */}
+              <div className="absolute inset-0 bg-indigo-deep/55" />
+              <div className="absolute inset-0 bg-gradient-to-r from-indigo-deep/80 via-indigo-deep/40 to-indigo-deep/80" />
+            </>
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-indigo-deep" />
           <div className="relative mx-auto max-w-container px-6 md:px-10 pt-36 pb-24">
             <div className="eyebrow flex items-center gap-3 mb-5">
