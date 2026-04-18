@@ -9,7 +9,7 @@ export default function SABWB() {
       title="One city. One calling."
       script="Across color lines."
       lede="SABWB gathers San Antonio's Black, White, and Brown communities around the shared conviction that unity is a witness. Teaching, worship, and presence — together."
-      notice="Visit sabwb.org for current programs"
+      externalLink={{ label: "Visit sabwb.org", href: "https://www.sabwb.org" }}
     />
   );
 }

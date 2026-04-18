@@ -61,10 +61,20 @@ export default function MinistriesGrid() {
                     →
                   </span>
                 </div>
-                <h3 className="font-display font-bold text-white text-2xl leading-tight mb-4">
+                <h3 className="font-display font-bold text-white text-2xl leading-tight mb-4 flex items-center gap-2 flex-wrap">
                   {m.name}
+                  {m.externalUrl && (
+                    <span className="text-[10px] font-display font-semibold uppercase tracking-wider text-gold-heritage border border-gold-heritage/40 rounded-full px-2 py-0.5">
+                      Live ↗
+                    </span>
+                  )}
                 </h3>
                 <p className="text-mist/70 text-sm leading-relaxed">{m.tagline}</p>
+                {m.externalUrl && (
+                  <div className="mt-4 text-xs text-gold-heritage/80 font-display font-semibold">
+                    {m.externalUrl.replace(/^https?:\/\//, "")}
+                  </div>
+                )}
                 {m.legalBadge && (
                   <div className="mt-5 pt-5 border-t border-white/10 text-[11px] text-mist/50 leading-relaxed">
                     {m.legalBadge}

@@ -2,6 +2,8 @@ import Link from "next/link";
 import Nav from "./Nav";
 import Footer from "./Footer";
 
+type ExternalLink = { label: string; href: string };
+
 type Props = {
   eyebrow: string;
   title: string;
@@ -9,6 +11,7 @@ type Props = {
   lede: string;
   notice?: string;
   accent?: "indigo" | "gold" | "teal" | "action";
+  externalLink?: ExternalLink;
 };
 
 const heroGradient = {
@@ -18,7 +21,15 @@ const heroGradient = {
   action: "bg-[radial-gradient(ellipse_at_30%_40%,#3A1111,#0B1F3D_70%)]",
 };
 
-export default function StubPage({ eyebrow, title, script, lede, notice, accent = "indigo" }: Props) {
+export default function StubPage({
+  eyebrow,
+  title,
+  script,
+  lede,
+  notice,
+  accent = "indigo",
+  externalLink,
+}: Props) {
   return (
     <>
       <Nav />
@@ -47,6 +58,22 @@ export default function StubPage({ eyebrow, title, script, lede, notice, accent 
             {notice && (
               <div className="mt-8 inline-block px-4 py-2 rounded-full border border-gold-heritage/30 bg-gold-heritage/5 text-xs font-display font-semibold text-gold-heritage tracking-wide">
                 {notice}
+              </div>
+            )}
+
+            {externalLink && (
+              <div className="mt-10 flex flex-wrap gap-3">
+                <a
+                  href={externalLink.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                >
+                  {externalLink.label}
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <path d="M5 3h6v6M11 3L4 10" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
               </div>
             )}
           </div>
