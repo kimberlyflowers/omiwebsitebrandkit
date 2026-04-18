@@ -11,9 +11,9 @@ const stats = [
 
 export default function ImpactStats() {
   return (
-    <section className="relative py-20 md:py-28 bg-indigo-deep">
+    <section className="relative py-20 md:py-28 bg-white text-indigo-deep">
       <div className="mx-auto max-w-container px-6 md:px-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 border-y border-white/10 py-12 md:py-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 border-y border-mist py-12 md:py-16">
           {stats.map((s, i) => (
             <motion.div
               key={s.label}
@@ -26,11 +26,11 @@ export default function ImpactStats() {
               <div className="font-display font-black text-5xl md:text-7xl leading-none text-gradient-sunrise">
                 {s.num}
               </div>
-              <div className="mt-3 eyebrow text-mist/70">{s.label}</div>
+              <div className="mt-3 eyebrow text-graphite/70">{s.label}</div>
             </motion.div>
           ))}
         </div>
-        <p className="text-center mt-6 text-xs text-mist/40">
+        <p className="text-center mt-6 text-xs text-graphite/50">
           Figures are placeholders — replace with live metrics.
         </p>
       </div>
