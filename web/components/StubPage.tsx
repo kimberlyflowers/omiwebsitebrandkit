@@ -79,19 +79,25 @@ export default function StubPage({
           </div>
         </section>
 
-        <section className="py-24 bg-indigo-deep">
+        <section className="relative py-24 md:py-32 bg-offwhite text-indigo-deep">
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold-heritage/60 to-transparent" />
           <div className="mx-auto max-w-container px-6 md:px-10 text-center">
-            <div className="eyebrow text-mist/50 mb-4">In progress</div>
-            <h2 className="font-display font-bold text-white text-2xl md:text-3xl mb-3">
+            <div className="eyebrow text-gold-heritage mb-4">In progress</div>
+            <h2 className="font-display font-bold text-indigo-deep text-2xl md:text-3xl mb-3">
               This page is being prepared.
             </h2>
-            <p className="text-mist/70 max-w-xl mx-auto">
+            <p className="text-graphite/80 max-w-xl mx-auto">
               Full content arrives with the next release. In the meantime, head
               back home or reach out.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link href="/" className="btn btn-primary">Back home</Link>
-              <Link href="/contact" className="btn btn-ghost">Contact us</Link>
+              <Link
+                href="/contact"
+                className="btn inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full border border-indigo-deep/20 text-indigo-deep hover:bg-indigo-deep hover:text-white transition-all font-display font-semibold text-sm"
+              >
+                Contact us
+              </Link>
             </div>
           </div>
         </section>
