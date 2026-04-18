@@ -43,9 +43,9 @@ export default function Hero({
   return (
     <section className="relative min-h-screen overflow-hidden bg-celestial grain">
       {/* Layer 1 — full-bleed video background.
-          object-position anchors the earth/bright portion at the top
-          (the video starts in dark space — we crop that out via position
-          + a gentle scale so the whole hero reads as illuminated earth). */}
+          Scale from the bottom pushes the video's dark space (top of the
+          clip) above the viewport and lets the illuminated earth fill the
+          full hero. Works on both landscape desktop and portrait mobile. */}
       <div className="absolute inset-0">
         <video
           src={videoSrc}
@@ -57,7 +57,11 @@ export default function Hero({
           preload="auto"
           aria-hidden="true"
           className="w-full h-full object-cover pointer-events-none"
-          style={{ objectPosition: "center 75%", transform: "scale(1.15)" }}
+          style={{
+            objectPosition: "center bottom",
+            transform: "scale(1.5)",
+            transformOrigin: "center bottom",
+          }}
         />
       </div>
 
