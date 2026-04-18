@@ -2,6 +2,7 @@ import Link from "next/link";
 import Nav from "./Nav";
 import Footer from "./Footer";
 import ImageSlot from "./ImageSlot";
+import RegisterCard from "./RegisterCard";
 import type { EventDetail } from "@/lib/events";
 
 /* ============================================================
@@ -279,102 +280,8 @@ export default function EventPage({ event: e }: Props) {
               </div>
             </div>
 
-            {/* RIGHT — sticky register card */}
-            <aside className="lg:sticky lg:top-28 self-start">
-              <div className="rounded-lg bg-white border border-mist shadow-omi-md overflow-hidden">
-                <div className="h-1 bg-gradient-to-r from-gold-heritage to-gold-bright" />
-                <div className="p-6 md:p-7">
-                  <div className="flex items-start gap-3">
-                    <div className="text-gold-heritage mt-1"><Icon name="calendar" className="w-5 h-5" /></div>
-                    <div>
-                      <div className="font-display font-semibold text-indigo-deep text-sm">
-                        {dateLabel}
-                      </div>
-                      <div className="text-xs text-graphite/70 mt-0.5">{timeLabel}</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3 mt-4">
-                    <div className="text-gold-heritage mt-1"><Icon name="pin" className="w-5 h-5" /></div>
-                    <div>
-                      <div className="font-display font-semibold text-indigo-deep text-sm">
-                        {e.location.name}
-                      </div>
-                      {e.location.city && (
-                        <div className="text-xs text-graphite/70 mt-0.5">{e.location.city}</div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="my-6 divider-gold" />
-
-                  <div className="eyebrow text-graphite/60 mb-3">Tickets</div>
-                  <div className="space-y-2">
-                    {e.priceTiers.map((t, i) => (
-                      <label
-                        key={i}
-                        className={`flex items-start gap-3 px-4 py-3 rounded-md border cursor-pointer transition-colors ${
-                          t.soldOut
-                            ? "border-mist bg-mist/20 cursor-not-allowed opacity-60"
-                            : "border-mist hover:border-gold-heritage/60 hover:bg-gold-heritage/5"
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name={`tier-${e.slug}`}
-                          disabled={t.soldOut}
-                          defaultChecked={i === 0 && !t.soldOut}
-                          className="mt-1 accent-gold-heritage"
-                        />
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-baseline justify-between gap-3">
-                            <div className="font-display font-semibold text-indigo-deep text-sm">
-                              {t.label}
-                            </div>
-                            <div className="font-display font-black text-indigo-deep text-sm">
-                              {t.price}
-                            </div>
-                          </div>
-                          {t.description && (
-                            <div className="text-xs text-graphite/70 mt-1 leading-snug">
-                              {t.description}
-                            </div>
-                          )}
-                          {t.soldOut && (
-                            <div className="text-[10px] uppercase tracking-wider font-display font-semibold text-[#B83636] mt-1">
-                              Sold out
-                            </div>
-                          )}
-                        </div>
-                      </label>
-                    ))}
-                  </div>
-
-                  <button
-                    type="button"
-                    className="btn btn-primary w-full mt-6 !justify-center"
-                  >
-                    <Icon name="ticket" className="w-4 h-4" />
-                    Register
-                  </button>
-
-                  <div className="mt-4 flex items-center justify-center gap-5 text-xs text-graphite/60">
-                    <button type="button" className="inline-flex items-center gap-1.5 hover:text-indigo-deep transition-colors">
-                      <Icon name="share" className="w-3.5 h-3.5" />
-                      Share
-                    </button>
-                    <span className="inline-flex items-center gap-1.5">
-                      <Icon name="check" className="w-3.5 h-3.5 text-teal-mission" />
-                      Secure checkout
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <p className="mt-4 text-[11px] text-graphite/60 leading-relaxed px-2">
-                Registration is handled via our partner platform. You&apos;ll receive a
-                confirmation email with all event details after checkout.
-              </p>
-            </aside>
+            {/* RIGHT — sticky register card (real Stripe flow) */}
+            <RegisterCard event={e} dateLabel={dateLabel} timeLabel={timeLabel} />
           </div>
         </section>
       </main>

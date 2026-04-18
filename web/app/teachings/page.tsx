@@ -21,12 +21,21 @@ export default function Teachings() {
           meta: "Teaching · 3 days",
           body: "Foundations of Christian formation in the public square.",
           caption: "Winter cohort photo",
+          href: "/events/winter-2026-intensive",
         },
         {
           title: "Spring Intensive · March 2026",
           meta: "Teaching · 3 days",
           body: "Scripture, culture, and the question of authority.",
           caption: "Spring cohort photo",
+          href: "/events/spring-2026-intensive",
+        },
+        {
+          title: "Pre-Conference Primer · April 2026",
+          meta: "Teaching · 1 day",
+          body: "Day-long primer before the annual conference — open to all registrants.",
+          caption: "Primer photo",
+          href: "/events/pre-conference-primer-2026",
         },
         {
           title: "Summer Intensive · July 2026",
@@ -38,20 +47,16 @@ export default function Teachings() {
         {
           title: "Fall Intensive · September 2026",
           meta: "Teaching · 3 days",
-          body: "Curriculum forthcoming. Placeholder card.",
+          body: "Curriculum forthcoming — full details release in summer.",
           caption: "Fall cohort photo",
-        },
-        {
-          title: "Pre-Conference Primer · April 2026",
-          meta: "Teaching · 1 day",
-          body: "Day-long primer before the annual conference — open to all registrants.",
-          caption: "Primer photo",
+          href: "/events/fall-2026-intensive",
         },
         {
           title: "Late-Year Intensive · November 2026",
           meta: "Teaching · 3 days",
-          body: "Year-end gathering. Reflection, re-commissioning, and looking forward.",
+          body: "Year-end gathering. Reflection, re-commissioning, looking forward.",
           caption: "November cohort photo",
+          href: "/events/late-year-2026-intensive",
         },
       ]}
     />
