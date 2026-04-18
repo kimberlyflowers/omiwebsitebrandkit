@@ -12,7 +12,7 @@ import Globe from "./Globe";
  *   - conference-reel.mp4  → subtle video backdrop (25% opacity, screen blend)
  * When no banner.jpg exists, the globe + gradient hero renders instead.
  */
-const BANNER_SRC = "/omi-banner.png";
+const BANNER_SRC = "/earth-wide.png";
 const VIDEO_SRC = "/conference-reel.mp4";
 
 type Props = {
