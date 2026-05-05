@@ -1,4 +1,5 @@
 import Nav from "@/components/Nav";
+import Script from "next/script";
 import Hero from "@/components/Hero";
 import WhatWeDo from "@/components/WhatWeDo";
 import MinistriesGrid from "@/components/MinistriesGrid";
@@ -50,6 +51,13 @@ export default async function HomePage() {
         <CtaBlock />
       </main>
       <Footer />
+      <Script
+        src="https://widgets.leadconnectorhq.com/loader.js"
+        data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+        data-widget-id="69fa26a7e0f3a34ff630537b"
+        data-source="WEB_USER"
+        strategy="afterInteractive"
+      />
     </>
   );
 }

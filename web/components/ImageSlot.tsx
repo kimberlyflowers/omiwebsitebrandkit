@@ -1,9 +1,28 @@
+import Image from "next/image";
+
 /* ============================================================
    Image placeholder — drop an <Image> here to fill it.
    Keeps every empty photo spot visually obvious and catalogued
    via the data-image-slot attribute, so we can swap them in
    systematically later (Nano Banana / real shoot / stock).
    ============================================================ */
+
+const slotImages: Record<string, string> = {
+  "home-whatwedo-01": "/images/home/home-whatwedo-01.jpg",
+  "home-whatwedo-02": "/images/home/home-whatwedo-02.jpg",
+  "home-whatwedo-03": "/images/home/home-whatwedo-03.jpg",
+  "home-ministry-yes": "/images/home/home-ministry-yes.jpg",
+  "home-ministry-empowerment-center-network":
+    "/images/home/home-ministry-empowerment-center-network.jpg",
+  "home-ministry-entrepreneurial-development":
+    "/images/home/home-ministry-entrepreneurial-development.jpg",
+  "home-ministry-sabwb": "/images/home/home-ministry-sabwb.jpg",
+  "home-ministry-sabwb-action": "/images/home/home-ministry-sabwb-action.jpg",
+  "home-ministry-missions-outreach":
+    "/images/home/home-ministry-missions-outreach.jpg",
+  "home-upcoming-gold": "/images/home/home-upcoming-gold.jpg",
+  "home-upcoming-teal": "/images/home/home-upcoming-teal.jpg",
+};
 
 type Props = {
   ratio?: string;
@@ -20,6 +39,25 @@ export default function ImageSlot({
   id,
   className = "",
 }: Props) {
+  const imageSrc = id ? slotImages[id] : undefined;
+
+  if (imageSrc) {
+    return (
+      <div
+        className={`${ratio} relative w-full overflow-hidden rounded-lg ${className}`}
+        data-image-slot={id}
+      >
+        <Image
+          src={imageSrc}
+          alt={caption}
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+      </div>
+    );
+  }
+
   const border =
     tone === "dark"
       ? "border-white/15 bg-white/[0.03] text-white/55"
