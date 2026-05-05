@@ -1,5 +1,5 @@
-@import "../../brand/tokens/colors.css";
-@import "../../brand/tokens/spacing.css";
+@import "../brand/tokens/colors.css";
+@import "../brand/tokens/spacing.css";
 
 @tailwind base;
 @tailwind components;
