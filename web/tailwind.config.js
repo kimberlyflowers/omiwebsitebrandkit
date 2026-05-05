@@ -1,4 +1,4 @@
-const brandPreset = require('../brand/tokens/tailwind-preset');
+const brandPreset = require('./brand/tokens/tailwind-preset');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
