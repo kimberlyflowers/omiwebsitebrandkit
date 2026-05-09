@@ -53,7 +53,9 @@ export default function MinistriesGrid() {
               transition={{ duration: 0.6, delay: (i % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
             >
               <Link
-                href={`/ministries/${m.slug}`}
+                href={m.externalUrl ?? `/ministries/${m.slug}`}
+                target={m.externalUrl ? "_blank" : undefined}
+                rel={m.externalUrl ? "noopener noreferrer" : undefined}
                 className={`card group block h-full bg-gradient-to-br ${accent[m.accent]} overflow-hidden`}
               >
                 <ImageSlot

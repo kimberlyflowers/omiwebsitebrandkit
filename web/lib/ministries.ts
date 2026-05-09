@@ -23,6 +23,8 @@ export const ministries: Ministry[] = [
     short: "For YES families",
     tagline: "Supporting the parents behind every student.",
     accent: "indigo",
+    externalUrl:
+      "https://ipykfgl2mzarbynm4zmh.app.clientclub.net/communities/groups/empowerment-center-network/home",
   },
   {
     slug: "entrepreneurial-development",
