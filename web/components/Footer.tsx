@@ -15,6 +15,7 @@ const navCols = [
     title: "Engage",
     links: [
       { href: "/give", label: "Give" },
+      { href: "/members", label: "Member Access" },
       { href: "/contact", label: "Contact" },
       { href: "/about#history", label: "Our Story" },
     ],

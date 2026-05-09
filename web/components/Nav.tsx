@@ -8,6 +8,7 @@ const primary = [
   { href: "/about", label: "About" },
   { href: "/conference", label: "Conference" },
   { href: "/events", label: "Events" },
+  { href: "/members", label: "Member Access" },
   { href: "/commentary", label: "Commentary" },
 ];
 
