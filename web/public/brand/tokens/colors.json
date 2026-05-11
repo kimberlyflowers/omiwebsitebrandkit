@@ -1,0 +1,63 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "meta": {
+    "brand": "Outpouring Missions International",
+    "version": "1.0.0",
+    "updated": "2026-04-18"
+  },
+  "color": {
+    "indigo": {
+      "deep":   { "value": "#0B1F3D", "type": "color", "description": "Primary surface, headlines, authority" },
+      "royal":  { "value": "#152C5B", "type": "color", "description": "Secondary surface, gradients, hover" },
+      "700":    { "value": "#1E3C78", "type": "color" },
+      "600":    { "value": "#2A54A1", "type": "color" },
+      "500":    { "value": "#3D6CC4", "type": "color" }
+    },
+    "gold": {
+      "heritage": { "value": "#D4A24C", "type": "color", "description": "Accents, CTAs, seals" },
+      "bright":   { "value": "#F2C54A", "type": "color", "description": "Highlights, gradient tips" },
+      "900":      { "value": "#8A6322", "type": "color" },
+      "700":      { "value": "#B6832F", "type": "color" },
+      "100":      { "value": "#FCE8B2", "type": "color" }
+    },
+    "teal": {
+      "mission":  { "value": "#17A4C2", "type": "color", "description": "YES sub-brand, links, active" },
+      "electric": { "value": "#00C2E0", "type": "color", "description": "YES Rise Up, youth energy" },
+      "900":      { "value": "#0E6A7F", "type": "color" },
+      "700":      { "value": "#128AA6", "type": "color" },
+      "100":      { "value": "#B7EEF7", "type": "color" }
+    },
+    "neutral": {
+      "white":    { "value": "#FFFFFF", "type": "color" },
+      "offwhite": { "value": "#F4F6FA", "type": "color" },
+      "mist":     { "value": "#D9DEE8", "type": "color" },
+      "graphite": { "value": "#2A2D34", "type": "color" },
+      "charcoal": { "value": "#141518", "type": "color" }
+    }
+  },
+  "gradient": {
+    "celestial": {
+      "value": "linear-gradient(180deg, #0B1F3D 0%, #152C5B 55%, #17A4C2 100%)",
+      "type": "gradient"
+    },
+    "sunrise": {
+      "value": "linear-gradient(90deg, #D4A24C 0%, #F2C54A 100%)",
+      "type": "gradient"
+    },
+    "horizon": {
+      "value": "linear-gradient(135deg, #0B1F3D 0%, #17A4C2 55%, #F2C54A 100%)",
+      "type": "gradient"
+    }
+  },
+  "role": {
+    "primary":      { "value": "{color.indigo.deep}",   "type": "color" },
+    "primary-fg":   { "value": "{color.neutral.white}", "type": "color" },
+    "accent":       { "value": "{color.gold.heritage}", "type": "color" },
+    "accent-fg":    { "value": "{color.indigo.deep}",   "type": "color" },
+    "link":         { "value": "{color.teal.mission}",  "type": "color" },
+    "bg-light":     { "value": "{color.neutral.offwhite}", "type": "color" },
+    "bg-dark":      { "value": "{color.indigo.deep}",   "type": "color" },
+    "text-light":   { "value": "{color.indigo.deep}",   "type": "color" },
+    "text-dark":    { "value": "{color.neutral.white}", "type": "color" }
+  }
+}

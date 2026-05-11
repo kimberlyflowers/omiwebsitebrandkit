@@ -1,0 +1,80 @@
+/* ============================================================
+   Outpouring Missions International — Color Tokens
+   Consume via :root, no preprocessor required.
+   ============================================================ */
+
+:root {
+  /* Primary — Indigo */
+  --omi-indigo-deep:     #0B1F3D;
+  --omi-indigo-royal:    #152C5B;
+  --omi-indigo-900:      #0B1F3D;
+  --omi-indigo-800:      #152C5B;
+  --omi-indigo-700:      #1E3C78;
+  --omi-indigo-600:      #2A54A1;
+  --omi-indigo-500:      #3D6CC4;
+
+  /* Primary — Gold */
+  --omi-gold-heritage:   #D4A24C;
+  --omi-gold-bright:     #F2C54A;
+  --omi-gold-900:        #8A6322;
+  --omi-gold-700:        #B6832F;
+  --omi-gold-500:        #D4A24C;
+  --omi-gold-300:        #F2C54A;
+  --omi-gold-100:        #FCE8B2;
+
+  /* Sub-brand — Teal */
+  --omi-teal-mission:    #17A4C2;
+  --omi-teal-electric:   #00C2E0;
+  --omi-teal-900:        #0E6A7F;
+  --omi-teal-700:        #128AA6;
+  --omi-teal-500:        #17A4C2;
+  --omi-teal-300:        #00C2E0;
+  --omi-teal-100:        #B7EEF7;
+
+  /* Neutrals */
+  --omi-white:           #FFFFFF;
+  --omi-offwhite:        #F4F6FA;
+  --omi-mist:            #D9DEE8;
+  --omi-graphite:        #2A2D34;
+  --omi-charcoal:        #141518;
+
+  /* Semantic — light surface defaults */
+  --color-bg:            var(--omi-offwhite);
+  --color-surface:       var(--omi-white);
+  --color-text:          var(--omi-indigo-deep);
+  --color-text-muted:    var(--omi-graphite);
+  --color-border:        var(--omi-mist);
+  --color-primary:       var(--omi-indigo-deep);
+  --color-primary-fg:    var(--omi-white);
+  --color-accent:        var(--omi-gold-heritage);
+  --color-accent-fg:     var(--omi-indigo-deep);
+  --color-link:          var(--omi-teal-mission);
+  --color-link-hover:    var(--omi-indigo-royal);
+
+  /* Gradients */
+  --gradient-celestial:  linear-gradient(180deg, #0B1F3D 0%, #152C5B 55%, #17A4C2 100%);
+  --gradient-sunrise:    linear-gradient(90deg, #D4A24C 0%, #F2C54A 100%);
+  --gradient-horizon:    linear-gradient(135deg, #0B1F3D 0%, #17A4C2 55%, #F2C54A 100%);
+
+  /* Elevation (indigo-tinted shadows) */
+  --shadow-sm:  0 1px 2px rgba(11, 31, 61, 0.08);
+  --shadow-md:  0 6px 20px rgba(11, 31, 61, 0.12);
+  --shadow-lg:  0 20px 48px rgba(11, 31, 61, 0.20);
+  --shadow-gold:0 8px 24px rgba(212, 162, 76, 0.28);
+}
+
+/* Dark surface — Deep Indigo base (hero, footer, app shell) */
+[data-theme="dark"],
+.omi-dark {
+  --color-bg:            var(--omi-indigo-deep);
+  --color-surface:       var(--omi-indigo-royal);
+  --color-text:          var(--omi-white);
+  --color-text-muted:    var(--omi-mist);
+  --color-border:        rgba(255, 255, 255, 0.12);
+  --color-primary:       var(--omi-gold-heritage);
+  --color-primary-fg:    var(--omi-indigo-deep);
+  --color-accent:        var(--omi-teal-mission);
+  --color-accent-fg:     var(--omi-white);
+  --color-link:          var(--omi-teal-electric);
+  --color-link-hover:    var(--omi-gold-bright);
+}
