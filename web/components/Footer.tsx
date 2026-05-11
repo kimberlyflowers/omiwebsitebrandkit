@@ -18,6 +18,7 @@ const navCols = [
       { href: "/members", label: "Member Access" },
       { href: "/contact", label: "Contact" },
       { href: "/about#history", label: "Our Story" },
+      { href: "/brand-kit.html", label: "Brand Kit" },
     ],
   },
 ];
@@ -82,7 +83,7 @@ export default function Footer() {
                     )}
                     {m.externalUrl && (
                       <span className="text-[9px] uppercase tracking-wider text-gold-heritage/80 border border-gold-heritage/30 rounded-full px-1.5 py-0.5 group-hover:text-gold-heritage group-hover:border-gold-heritage transition-colors">
-                        Live ↗
+                        Live â
                       </span>
                     )}
                   </Link>
@@ -93,7 +94,7 @@ export default function Footer() {
                       rel="noopener noreferrer"
                       className="block mt-1 text-[11px] text-gold-heritage/70 hover:text-gold-heritage transition-colors"
                     >
-                      {m.externalUrl.replace(/^https?:\/\//, "")} ↗
+                      {m.externalUrl.replace(/^https?:\/\//, "")} â
                     </a>
                   )}
                 </li>
@@ -105,7 +106,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="pt-8 flex flex-col md:flex-row justify-between gap-6 text-xs text-mist/50">
           <div>
-            © 2008–{new Date().getFullYear()} Outpouring Missions International. All
+            Â© 2008â{new Date().getFullYear()} Outpouring Missions International. All
             rights reserved.
             <span className="block mt-1 text-mist/40">
               Outpouring Missions International is a 501(c)(3) tax-exempt
