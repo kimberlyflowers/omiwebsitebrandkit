@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OMI Letterhead Template</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Kaushan+Script&display=swap" rel="stylesheet">
+<style>
+  @page { size: Letter; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #E8EAEE; font-family: "Inter", system-ui, sans-serif; color: #1A1A1A; }
+  .page {
+    width: 8.5in; min-height: 11in;
+    background: #FAFAF7;
+    margin: 24px auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    padding: 0.85in 0.95in 1in;
+    position: relative;
+    display: flex; flex-direction: column;
+  }
+  /* Top bar */
+  .top-bar {
+    position: absolute; top: 0; left: 0; right: 0; height: 18px;
+    background: linear-gradient(90deg, #0B1F3D 0%, #0B1F3D 60%, #D4A24C 60%, #D4A24C 78%, #17A4C2 78%, #17A4C2 100%);
+  }
+  /* Header */
+  .header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding-bottom: 22px; border-bottom: 1px solid #E5E7EB;
+  }
+  .brand { display: flex; flex-direction: column; gap: 4px; }
+  .brand .wordmark {
+    font-family: "Montserrat", sans-serif; font-weight: 900;
+    font-size: 24px; color: #0B1F3D; letter-spacing: -0.02em; line-height: 1;
+  }
+  .brand .sub {
+    font-family: "Montserrat", sans-serif; font-weight: 400;
+    font-size: 9px; letter-spacing: 0.32em; color: #4A4A4A; text-transform: uppercase;
+  }
+  .brand .tag {
+    font-family: "Kaushan Script", cursive; color: #D4A24C;
+    font-size: 18px; margin-top: 4px;
+  }
+  .meta {
+    text-align: right; font-size: 9px; color: #4A4A4A; line-height: 1.6;
+    font-family: "Montserrat", sans-serif; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .meta .eyebrow { color: #D4A24C; font-weight: 600; margin-bottom: 6px; }
+  /* Body */
+  .body {
+    flex: 1; padding-top: 36px; font-size: 11pt; line-height: 1.65;
+  }
+  .body .date { color: #4A4A4A; font-size: 10pt; margin-bottom: 28px; }
+  .body .recipient { margin-bottom: 28px; font-size: 10.5pt; line-height: 1.5; }
+  .body .recipient strong { font-family: "Montserrat", sans-serif; font-weight: 600; }
+  .body .salutation { margin-bottom: 14px; }
+  .body p { margin: 0 0 14px; }
+  .body .closing { margin-top: 28px; }
+  .body .signature {
+    margin-top: 56px; font-family: "Montserrat", sans-serif;
+    font-weight: 700; color: #0B1F3D; font-size: 11pt;
+  }
+  .body .signature .title {
+    display: block; font-weight: 400; font-size: 9pt;
+    letter-spacing: 0.18em; text-transform: uppercase; color: #4A4A4A;
+    margin-top: 4px;
+  }
+  /* Footer */
+  .footer {
+    margin-top: auto; padding-top: 18px; border-top: 1px solid #E5E7EB;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: "Montserrat", sans-serif; font-size: 8.5px;
+    color: #4A4A4A; letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .footer .pills span { margin-right: 16px; }
+  .footer .pills span::before {
+    content: ""; display: inline-block; width: 5px; height: 5px;
+    background: #D4A24C; margin-right: 6px; vertical-align: 1px;
+  }
+  .footer .est { color: #D4A24C; font-weight: 600; }
+
+  /* Editable hint shown only on screen */
+  .hint {
+    max-width: 8.5in; margin: 0 auto 8px; padding: 12px 16px;
+    background: #FFF8E1; border-left: 3px solid #D4A24C;
+    font-size: 12px; color: #4A4A4A; line-height: 1.5;
+    border-radius: 4px;
+  }
+  @media print {
+    body { background: white; }
+    .page { box-shadow: none; margin: 0; }
+    .hint { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hint">
+  <strong>Editable template.</strong> Open this file, edit the text directly in your browser using View → Developer, or open in Word / Pages by saving as <code>.docx</code>. Print or "Save as PDF" gives a clean Letter-size sheet.
+</div>
+
+<div class="page">
+  <div class="top-bar"></div>
+
+  <div class="header">
+    <div class="brand">
+      <div class="wordmark">OUTPOURING</div>
+      <div class="sub">Missions International</div>
+      <div class="tag">Igniting Futures.</div>
+    </div>
+    <div class="meta">
+      <div class="eyebrow">Est. 2008</div>
+      <div>San Antonio, TX</div>
+      <div>hello@outpouringmissions.org</div>
+      <div>outpouringmissions.org</div>
+    </div>
+  </div>
+
+  <div class="body" contenteditable="true" spellcheck="false">
+    <div class="date">April 30, 2026</div>
+
+    <div class="recipient">
+      <strong>Recipient Name</strong><br>
+      Title / Organization<br>
+      Street Address<br>
+      City, State ZIP
+    </div>
+
+    <div class="salutation">Dear Friend,</div>
+
+    <p>Replace this paragraph with the body of your letter. The template is fully editable in the browser — just click and type. Keep paragraphs short and direct. Lead with what you are asking, why it matters, and what happens next.</p>
+
+    <p>Use one sentence per idea where you can. The brand voice is warm, confident, and rooted in our four pillars: Faith. Education. Leadership. Impact. Avoid jargon, avoid hedging, name the people the work serves.</p>
+
+    <p>When citing dollar figures, programs, or outcomes, anchor them to a specific year, cohort, or region. Specificity is credibility.</p>
+
+    <div class="closing">With gratitude,</div>
+
+    <div class="signature">
+      First Last
+      <span class="title">Title · Outpouring Missions International</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="pills">
+      <span>Faith</span><span>Education</span><span>Leadership</span><span>Impact</span>
+    </div>
+    <div class="est">501(c)(3) · EST. 2008</div>
+  </div>
+</div>
+
+</body>
+</html>
