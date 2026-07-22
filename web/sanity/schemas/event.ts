@@ -55,6 +55,23 @@ export default defineType({
       options: { hotspot: true },
       fields: [{ name: "alt", type: "string", title: "Alt text" }],
     },
+    {
+      name: "experienceImage",
+      type: "image",
+      title: "Landscape event image (16:9)",
+      description: "Displayed above About this event. Upload a landscape photo or flyer that shows what attendees will experience.",
+      group: "core",
+      options: { hotspot: true },
+      fields: [{ name: "alt", type: "string", title: "Alt text" }],
+    },
+    {
+      name: "experienceVideo",
+      type: "file",
+      title: "Event video (optional)",
+      description: "Optional uploaded video for the same 16:9 area above About this event. When present, it displays instead of the landscape image.",
+      group: "core",
+      options: { accept: "video/*" },
+    },
 
     /* Dates & location */
     { name: "startDate", type: "datetime", title: "Start date/time", group: "details", validation: (r) => r.required() },
