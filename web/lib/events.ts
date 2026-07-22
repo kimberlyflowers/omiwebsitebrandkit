@@ -36,7 +36,7 @@ export type EventDetail = {
   heroImage?: string;
 };
 
-export const events: EventDetail[] = [
+const eventCatalog: EventDetail[] = [
   {
     slug: "2026-annual-conference",
     kind: "Conference",
@@ -343,6 +343,12 @@ export const events: EventDetail[] = [
     coverCaption: "Year-end gathering · group photograph",
   },
 ];
+
+// Only the Annual Conference is a confirmed public event. The remaining
+// catalog entries are retained as internal drafting references, not listings.
+export const events: EventDetail[] = eventCatalog.filter(
+  (event) => event.slug === "2026-annual-conference",
+);
 
 export function getEvent(slug: string): EventDetail | undefined {
   return events.find((e) => e.slug === slug);
