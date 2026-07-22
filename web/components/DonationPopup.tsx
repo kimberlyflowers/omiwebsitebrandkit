@@ -91,26 +91,30 @@ export default function DonationPopup() {
   return (
     <div className="fixed inset-0 z-[100] flex items-end justify-center md:items-center" role="dialog" aria-modal="true" aria-labelledby="give-title">
       <button type="button" className="absolute inset-0 bg-indigo-deep/85 backdrop-blur-sm" onClick={close} aria-label="Close giving form" />
-      <div className="relative max-h-[94vh] w-full overflow-y-auto rounded-t-2xl bg-white shadow-omi-lg md:m-6 md:max-w-3xl md:rounded-xl">
-        <div className="sticky top-0 z-10 flex items-start justify-between gap-5 border-b border-mist bg-white px-6 py-5 md:px-8">
+      <div className="relative max-h-[94vh] w-full overflow-y-auto rounded-t-2xl bg-white shadow-omi-lg md:m-4 md:flex md:h-[760px] md:max-h-[calc(100vh-2rem)] md:max-w-6xl md:flex-col md:overflow-hidden md:rounded-xl">
+        <div className="sticky top-0 z-10 flex items-start justify-between gap-5 border-b border-mist bg-white px-6 py-4 md:static md:px-8">
           <div><div className="eyebrow text-gold-heritage">Secure giving</div><h2 id="give-title" className="mt-1 font-display text-2xl font-black text-indigo-deep">Partner with OMI</h2></div>
           <button type="button" onClick={close} className="rounded-full border border-mist px-3 py-1.5 text-sm text-graphite hover:border-gold-heritage" aria-label="Close">Close</button>
         </div>
-        <div className="p-6 md:p-8">
-          <div className="grid grid-cols-2 gap-2 rounded-lg bg-offwhite p-1">
-            {(["one-time", "monthly"] as const).map((option) => <button key={option} type="button" onClick={() => setFrequency(option)} className={`rounded-md px-4 py-3 font-display text-sm font-semibold ${frequency === option ? "bg-indigo-deep text-white shadow" : "text-indigo-deep"}`}>{option === "one-time" ? "One-time gift" : "Monthly partner"}</button>)}
+        <div className="p-6 md:grid md:min-h-0 md:flex-1 md:grid-cols-[310px_minmax(0,1fr)] md:gap-8 md:p-0">
+          <div className="md:border-r md:border-mist md:bg-offwhite/60 md:p-7">
+            <p className="mb-5 hidden text-sm leading-relaxed text-graphite/70 md:block">Choose your gift. The secure payment form stays right here—no redirect and no separate checkout page.</p>
+            <div className="grid grid-cols-2 gap-2 rounded-lg bg-offwhite p-1 md:bg-white">
+              {(["one-time", "monthly"] as const).map((option) => <button key={option} type="button" onClick={() => setFrequency(option)} className={`rounded-md px-3 py-3 font-display text-sm font-semibold ${frequency === option ? "bg-indigo-deep text-white shadow" : "text-indigo-deep"}`}>{option === "one-time" ? "One-time" : "Monthly"}</button>)}
+            </div>
+            <div className="mt-5 grid grid-cols-2 gap-2">
+              {amounts.map((value) => <button key={value} type="button" onClick={() => { setAmount(value); setCustomAmount(""); }} className={`rounded-md border px-2 py-3 font-display font-bold ${amount === value && !customAmount ? "border-gold-heritage bg-gold-heritage/10 text-indigo-deep" : "border-mist bg-white text-graphite"}`}>${value}</button>)}
+            </div>
+            <label className="mt-4 block text-sm font-semibold text-indigo-deep">Custom amount
+              <div className="mt-1 flex rounded-md border border-mist bg-white focus-within:border-gold-heritage"><span className="px-3 py-3 text-graphite/60">$</span><input inputMode="decimal" value={customAmount} onChange={(event) => { const value = event.target.value; setCustomAmount(value); const parsed = Number(value); if (parsed >= 1) setAmount(parsed); }} placeholder="Other amount" className="w-full bg-transparent py-3 pr-3 outline-none" /></div>
+            </label>
+            <div className="mt-5 rounded-md border border-gold-heritage/20 bg-gold-heritage/5 p-4 text-xs leading-relaxed text-graphite/70">Your gift supports OMI programs and ministries. Payment details are handled securely by Stripe.</div>
           </div>
-          <div className="mt-5 grid grid-cols-4 gap-2">
-            {amounts.map((value) => <button key={value} type="button" onClick={() => { setAmount(value); setCustomAmount(""); }} className={`rounded-md border px-2 py-3 font-display font-bold ${amount === value && !customAmount ? "border-gold-heritage bg-gold-heritage/10 text-indigo-deep" : "border-mist text-graphite"}`}>${value}</button>)}
-          </div>
-          <label className="mt-3 block text-sm font-semibold text-indigo-deep">Custom amount
-            <div className="mt-1 flex rounded-md border border-mist bg-white focus-within:border-gold-heritage"><span className="px-3 py-3 text-graphite/60">$</span><input inputMode="decimal" value={customAmount} onChange={(event) => { const value = event.target.value; setCustomAmount(value); const parsed = Number(value); if (parsed >= 1) setAmount(parsed); }} placeholder="Other amount" className="w-full bg-transparent py-3 pr-3 outline-none" /></div>
-          </label>
-          <div className="mt-6 border-t border-mist pt-5">
-            <div className="mb-3 text-center"><div className="eyebrow text-gold-heritage">Embedded Stripe checkout</div><p className="mt-1 text-xs text-graphite/60">Your secure payment stays on this page.</p></div>
+          <div className="mt-6 min-w-0 border-t border-mist pt-5 md:mt-0 md:h-full md:overflow-hidden md:border-0 md:px-4 md:pb-3 md:pt-4">
+            <div className="mb-2 text-center"><div className="eyebrow text-gold-heritage">Embedded Stripe checkout</div><p className="mt-1 text-xs text-graphite/60">Secure payment stays on this page.</p></div>
             {loading && <div className="flex min-h-[320px] items-center justify-center text-sm text-graphite/60">Loading secure giving form…</div>}
             {error && <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</div>}
-            <div ref={mountRef} className={loading || error ? "hidden" : "min-h-[620px] w-full"} aria-label="Embedded Stripe giving form" />
+            <div ref={mountRef} className={loading || error ? "hidden" : "min-h-[620px] w-full md:h-[620px] md:min-h-0"} aria-label="Embedded Stripe giving form" />
           </div>
         </div>
       </div>
