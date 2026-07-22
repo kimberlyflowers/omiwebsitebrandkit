@@ -91,13 +91,13 @@ export default function DonationPopup() {
   return (
     <div className="fixed inset-0 z-[100] flex items-end justify-center md:items-center" role="dialog" aria-modal="true" aria-labelledby="give-title">
       <button type="button" className="absolute inset-0 bg-indigo-deep/85 backdrop-blur-sm" onClick={close} aria-label="Close giving form" />
-      <div className="relative max-h-[94vh] w-full overflow-y-auto rounded-t-2xl bg-white shadow-omi-lg md:m-4 md:flex md:h-[760px] md:max-h-[calc(100vh-2rem)] md:max-w-6xl md:flex-col md:overflow-hidden md:rounded-xl">
+      <div className="relative max-h-[94vh] w-full overflow-y-auto rounded-t-2xl bg-white shadow-omi-lg md:m-4 md:flex md:h-[760px] md:max-h-[calc(100vh-2rem)] md:max-w-[1240px] md:flex-col md:overflow-hidden md:rounded-xl">
         <div className="sticky top-0 z-10 flex items-start justify-between gap-5 border-b border-mist bg-white px-6 py-4 md:static md:px-8">
           <div><div className="eyebrow text-gold-heritage">Secure giving</div><h2 id="give-title" className="mt-1 font-display text-2xl font-black text-indigo-deep">Partner with OMI</h2></div>
           <button type="button" onClick={close} className="rounded-full border border-mist px-3 py-1.5 text-sm text-graphite hover:border-gold-heritage" aria-label="Close">Close</button>
         </div>
-        <div className="p-6 md:grid md:min-h-0 md:flex-1 md:grid-cols-[310px_minmax(0,1fr)] md:gap-8 md:p-0">
-          <div className="md:border-r md:border-mist md:bg-offwhite/60 md:p-7">
+        <div className="p-6 md:grid md:min-h-0 md:flex-1 md:grid-cols-[380px_minmax(0,1fr)] md:p-0">
+          <div className="min-w-0 md:border-r md:border-mist md:bg-offwhite/60 md:p-8">
             <p className="mb-5 hidden text-sm leading-relaxed text-graphite/70 md:block">Choose your gift. The secure payment form stays right here—no redirect and no separate checkout page.</p>
             <div className="grid grid-cols-2 gap-2 rounded-lg bg-offwhite p-1 md:bg-white">
               {(["one-time", "monthly"] as const).map((option) => <button key={option} type="button" onClick={() => setFrequency(option)} className={`rounded-md px-3 py-3 font-display text-sm font-semibold ${frequency === option ? "bg-indigo-deep text-white shadow" : "text-indigo-deep"}`}>{option === "one-time" ? "One-time" : "Monthly"}</button>)}
@@ -105,8 +105,9 @@ export default function DonationPopup() {
             <div className="mt-5 grid grid-cols-2 gap-2">
               {amounts.map((value) => <button key={value} type="button" onClick={() => { setAmount(value); setCustomAmount(""); }} className={`rounded-md border px-2 py-3 font-display font-bold ${amount === value && !customAmount ? "border-gold-heritage bg-gold-heritage/10 text-indigo-deep" : "border-mist bg-white text-graphite"}`}>${value}</button>)}
             </div>
-            <label className="mt-4 block text-sm font-semibold text-indigo-deep">Custom amount
-              <div className="mt-1 flex rounded-md border border-mist bg-white focus-within:border-gold-heritage"><span className="px-3 py-3 text-graphite/60">$</span><input inputMode="decimal" value={customAmount} onChange={(event) => { const value = event.target.value; setCustomAmount(value); const parsed = Number(value); if (parsed >= 1) setAmount(parsed); }} placeholder="Other amount" className="w-full bg-transparent py-3 pr-3 outline-none" /></div>
+            <label className="mt-5 block text-sm font-semibold text-indigo-deep">Custom amount
+              <div className="mt-2 grid grid-cols-[44px_minmax(0,1fr)] overflow-hidden rounded-md border border-mist bg-white shadow-sm focus-within:border-gold-heritage focus-within:ring-2 focus-within:ring-gold-heritage/15"><span className="flex items-center justify-center border-r border-mist bg-offwhite text-base font-semibold text-graphite/70">$</span><input inputMode="decimal" value={customAmount} onChange={(event) => { const value = event.target.value; setCustomAmount(value); const parsed = Number(value); if (parsed >= 1) setAmount(parsed); }} placeholder="Enter any amount" className="min-w-0 w-full bg-transparent px-4 py-3.5 text-base text-indigo-deep outline-none placeholder:text-graphite/45" /></div>
+              <span className="mt-1.5 block text-xs font-normal text-graphite/55">Minimum gift: $1</span>
             </label>
             <div className="mt-5 rounded-md border border-gold-heritage/20 bg-gold-heritage/5 p-4 text-xs leading-relaxed text-graphite/70">Your gift supports OMI programs and ministries. Payment details are handled securely by Stripe.</div>
           </div>

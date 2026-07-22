@@ -36,7 +36,12 @@ export async function POST(req: Request) {
           product_data: { name: frequency === "monthly" ? "OMI Monthly Partnership" : "Gift to Outpouring Missions International" },
         },
       }],
-      phone_number_collection: { enabled: true },
+      custom_fields: [{
+        key: "donor_name",
+        label: { type: "custom", custom: "Donor name" },
+        type: "text",
+        optional: false,
+      }],
       metadata: { site: "omi", source: "omi-give-page", purpose: "general-donation", frequency },
       return_url: `${origin}/give?donation=complete&session_id={CHECKOUT_SESSION_ID}`,
     });
