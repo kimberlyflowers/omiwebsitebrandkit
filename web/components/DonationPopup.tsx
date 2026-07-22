@@ -111,14 +111,35 @@ export default function DonationPopup() {
             </label>
             <div className="mt-5 rounded-md border border-gold-heritage/20 bg-gold-heritage/5 p-4 text-xs leading-relaxed text-graphite/70">Your gift supports OMI programs and ministries. Payment details are handled securely by Stripe.</div>
           </div>
-          <div className="mt-6 min-w-0 border-t border-mist pt-5 md:mt-0 md:h-full md:overflow-hidden md:border-0 md:px-4 md:pb-6 md:pt-4">
+          <div className="mt-6 min-w-0 border-t border-mist pt-5 md:mt-0 md:flex md:h-full md:flex-col md:overflow-hidden md:border-0 md:px-4 md:pb-3 md:pt-3">
             <div className="mb-2 text-center"><div className="eyebrow text-gold-heritage">Embedded Stripe checkout</div><p className="mt-1 text-xs text-graphite/60">Secure payment stays on this page.</p></div>
             {loading && <div className="flex min-h-[320px] items-center justify-center text-sm text-graphite/60">Loading secure giving form…</div>}
             {error && <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</div>}
-            <div ref={mountRef} className={loading || error ? "hidden" : "min-h-[560px] w-full"} aria-label="Embedded Stripe giving form" />
+            <div className="relative min-h-0 flex-1">
+              <div ref={mountRef} className={loading || error ? "hidden" : "checkout-scaler min-h-[560px] w-full"} aria-label="Embedded Stripe giving form" />
+            </div>
           </div>
         </div>
       </div>
+      <style jsx>{`
+        @media (min-width: 768px) {
+          .checkout-scaler {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 133.333%;
+            min-height: 760px;
+            transform: translateX(-50%) scale(0.75);
+            transform-origin: top center;
+          }
+        }
+        @media (min-width: 768px) and (max-height: 980px) {
+          .checkout-scaler {
+            width: 156.25%;
+            transform: translateX(-50%) scale(0.64);
+          }
+        }
+      `}</style>
     </div>
   );
 }
