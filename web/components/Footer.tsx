@@ -70,9 +70,7 @@ export default function Footer() {
               {ministries.map((m) => (
                 <li key={m.slug}>
                   <Link
-                    href={m.externalUrl ?? `/ministries/${m.slug}`}
-                    target={m.externalUrl ? "_blank" : undefined}
-                    rel={m.externalUrl ? "noopener noreferrer" : undefined}
+                    href={`/ministries/${m.slug}`}
                     className="text-sm text-mist/75 hover:text-white transition-colors inline-flex items-center gap-2 group"
                   >
                     {m.name}

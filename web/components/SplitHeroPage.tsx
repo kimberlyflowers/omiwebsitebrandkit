@@ -84,8 +84,8 @@ export default function SplitHeroPage({
                 {externalLink && (
                   <a
                     href={externalLink.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={externalLink.href.startsWith("http") ? "_blank" : undefined}
+                    rel={externalLink.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="btn btn-ghost"
                   >
                     {externalLink.label}

@@ -65,9 +65,7 @@ export default function Nav() {
                 {ministries.map((m) => (
                   <Link
                     key={m.slug}
-                    href={m.externalUrl ?? `/ministries/${m.slug}`}
-                    target={m.externalUrl ? "_blank" : undefined}
-                    rel={m.externalUrl ? "noopener noreferrer" : undefined}
+                    href={`/ministries/${m.slug}`}
                     className="block px-4 py-3 rounded-lg hover:bg-white/5 transition-colors group/item"
                   >
                     <div className="text-sm font-display font-semibold text-white flex items-center justify-between">
@@ -127,9 +125,7 @@ export default function Nav() {
               {ministries.map((m) => (
                 <Link
                   key={m.slug}
-                  href={m.externalUrl ?? `/ministries/${m.slug}`}
-                  target={m.externalUrl ? "_blank" : undefined}
-                  rel={m.externalUrl ? "noopener noreferrer" : undefined}
+                  href={`/ministries/${m.slug}`}
                   onClick={() => setMenuOpen(false)}
                   className="block py-2 text-sm text-white/80"
                 >

@@ -1,15 +1,17 @@
 import SplitHeroPage from "@/components/SplitHeroPage";
+import DonationPopup from "@/components/DonationPopup";
 
 export const metadata = { title: "Give — OMI" };
 
 export default function Give() {
   return (
-    <SplitHeroPage
+    <>
+      <SplitHeroPage
       eyebrow="Partner with us"
       title="Fuel the Outpouring."
       lede="Every teaching, every trip, every student — made possible by partners who believe transformation is worth the investment. Choose a partnership level, or give one-time. OMI is a 501(c)(3); gifts are tax-deductible."
-      primaryCta={{ label: "Give now", href: "#" }}
-      externalLink={{ label: "Monthly partnership", href: "#" }}
+      primaryCta={{ label: "Give now", href: "#give" }}
+      externalLink={{ label: "Monthly partnership", href: "#give-monthly" }}
       heroCaption="Community gathering photograph"
       stats={[
         { num: "2008", label: "Giving since" },
@@ -37,6 +39,8 @@ export default function Give() {
         title: "Every partner changes the math.",
         body: "Faithful consistency, not viral moments, is what funds deep work.",
       }}
-    />
+      />
+      <DonationPopup />
+    </>
   );
 }

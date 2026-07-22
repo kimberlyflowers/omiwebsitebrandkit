@@ -22,6 +22,10 @@ const slotImages: Record<string, string> = {
     "/images/home/home-ministry-missions-outreach.jpg",
   "home-upcoming-gold": "/images/home/home-upcoming-gold.jpg",
   "home-upcoming-teal": "/images/home/home-upcoming-teal.jpg",
+  "splithero-partner-with-us": "/images/give/give-hero.png",
+  "splithero-partner-with-us-feature-1": "/images/give/give-one-time.png",
+  "splithero-partner-with-us-feature-2": "/images/give/give-monthly.png",
+  "splithero-partner-with-us-feature-3": "/images/give/give-legacy.png",
   "longform-about-est-2008-1": "/images/site/longform-about-est-2008-1.jpg",
   "event-2026-annual-conference-speaker-1":
     "/images/site/event-2026-annual-conference-speaker-1.jpg",
