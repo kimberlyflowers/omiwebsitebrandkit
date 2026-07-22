@@ -25,7 +25,10 @@ export async function POST(req: Request) {
     const session = await stripe.checkout.sessions.create({
       ui_mode: "embedded_page",
       mode: recurring ? "subscription" : "payment",
-      payment_method_types: ["card"],
+    payment_method_types: ["card"],
+    wallet_options: {
+      link: { display: "never" },
+    },
       branding_settings: {
         background_color: "#ffffff",
         button_color: "#000000",

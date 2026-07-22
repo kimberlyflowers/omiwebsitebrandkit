@@ -96,7 +96,7 @@ export default function DonationPopup() {
           <div><div className="eyebrow text-gold-heritage">Secure giving</div><h2 id="give-title" className="mt-1 font-display text-2xl font-black text-indigo-deep">Partner with OMI</h2></div>
           <button type="button" onClick={close} className="rounded-full border border-mist px-3 py-1.5 text-sm text-graphite hover:border-gold-heritage" aria-label="Close">Close</button>
         </div>
-        <div className="p-6 md:grid md:min-h-0 md:flex-1 md:grid-cols-[380px_minmax(0,1fr)] md:p-0">
+        <div className="p-6 md:grid md:min-h-0 md:flex-1 md:grid-cols-[minmax(0,1fr)_560px] md:p-0">
           <div className="min-w-0 md:border-r md:border-mist md:bg-offwhite/60 md:p-8">
             <p className="mb-5 hidden text-sm leading-relaxed text-graphite/70 md:block">Choose your gift. The secure payment form stays right here—no redirect and no separate checkout page.</p>
             <div className="grid grid-cols-2 gap-2 rounded-lg bg-offwhite p-1 md:bg-white">
@@ -116,30 +116,11 @@ export default function DonationPopup() {
             {loading && <div className="flex min-h-[320px] items-center justify-center text-sm text-graphite/60">Loading secure giving form…</div>}
             {error && <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</div>}
             <div className="relative min-h-0 flex-1">
-              <div ref={mountRef} className={loading || error ? "hidden" : "checkout-scaler min-h-[560px] w-full"} aria-label="Embedded Stripe giving form" />
+              <div ref={mountRef} className={loading || error ? "hidden" : "min-h-[560px] w-full"} aria-label="Embedded Stripe giving form" />
             </div>
           </div>
         </div>
       </div>
-      <style jsx>{`
-        @media (min-width: 768px) {
-          .checkout-scaler {
-            position: absolute;
-            left: 50%;
-            top: 0;
-            width: 133.333%;
-            min-height: 760px;
-            transform: translateX(-50%) scale(0.75);
-            transform-origin: top center;
-          }
-        }
-        @media (min-width: 768px) and (max-height: 980px) {
-          .checkout-scaler {
-            width: 156.25%;
-            transform: translateX(-50%) scale(0.64);
-          }
-        }
-      `}</style>
     </div>
   );
 }
