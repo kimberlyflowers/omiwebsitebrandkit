@@ -91,7 +91,7 @@ export default function DonationPopup() {
   return (
     <div className="fixed inset-0 z-[100] flex items-end justify-center md:items-center" role="dialog" aria-modal="true" aria-labelledby="give-title">
       <button type="button" className="absolute inset-0 bg-indigo-deep/85 backdrop-blur-sm" onClick={close} aria-label="Close giving form" />
-      <div className="relative max-h-[94vh] w-full overflow-y-auto rounded-t-2xl bg-white shadow-omi-lg md:m-4 md:flex md:h-[760px] md:max-h-[calc(100vh-2rem)] md:max-w-[1240px] md:flex-col md:overflow-hidden md:rounded-xl">
+      <div className="relative max-h-[94dvh] w-full overflow-y-auto rounded-t-2xl bg-white shadow-omi-lg md:m-4 md:flex md:h-[calc(100dvh-2rem)] md:max-h-none md:max-w-[1240px] md:flex-col md:overflow-hidden md:rounded-xl">
         <div className="sticky top-0 z-10 flex items-start justify-between gap-5 border-b border-mist bg-white px-6 py-4 md:static md:px-8">
           <div><div className="eyebrow text-gold-heritage">Secure giving</div><h2 id="give-title" className="mt-1 font-display text-2xl font-black text-indigo-deep">Partner with OMI</h2></div>
           <button type="button" onClick={close} className="rounded-full border border-mist px-3 py-1.5 text-sm text-graphite hover:border-gold-heritage" aria-label="Close">Close</button>
@@ -111,11 +111,11 @@ export default function DonationPopup() {
             </label>
             <div className="mt-5 rounded-md border border-gold-heritage/20 bg-gold-heritage/5 p-4 text-xs leading-relaxed text-graphite/70">Your gift supports OMI programs and ministries. Payment details are handled securely by Stripe.</div>
           </div>
-          <div className="mt-6 min-w-0 border-t border-mist pt-5 md:mt-0 md:h-full md:overflow-hidden md:border-0 md:px-4 md:pb-3 md:pt-4">
+          <div className="mt-6 min-w-0 border-t border-mist pt-5 md:mt-0 md:h-full md:overflow-hidden md:border-0 md:px-4 md:pb-6 md:pt-4">
             <div className="mb-2 text-center"><div className="eyebrow text-gold-heritage">Embedded Stripe checkout</div><p className="mt-1 text-xs text-graphite/60">Secure payment stays on this page.</p></div>
             {loading && <div className="flex min-h-[320px] items-center justify-center text-sm text-graphite/60">Loading secure giving form…</div>}
             {error && <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</div>}
-            <div ref={mountRef} className={loading || error ? "hidden" : "min-h-[620px] w-full md:h-[620px] md:min-h-0"} aria-label="Embedded Stripe giving form" />
+            <div ref={mountRef} className={loading || error ? "hidden" : "min-h-[560px] w-full"} aria-label="Embedded Stripe giving form" />
           </div>
         </div>
       </div>

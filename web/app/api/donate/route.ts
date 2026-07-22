@@ -25,6 +25,14 @@ export async function POST(req: Request) {
     const session = await stripe.checkout.sessions.create({
       ui_mode: "embedded_page",
       mode: recurring ? "subscription" : "payment",
+      payment_method_types: ["card"],
+      branding_settings: {
+        background_color: "#ffffff",
+        button_color: "#000000",
+        border_style: "rounded",
+        display_name: "Outpouring Missions International",
+        font_family: "inter",
+      },
       submit_type: "donate",
       integration_identifier: "omi_giving_wqjxnrta",
       line_items: [{
