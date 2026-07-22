@@ -48,6 +48,14 @@ export default defineType({
     },
     { name: "tagline", type: "string", title: "Tagline", group: "core" },
     {
+      name: "featured",
+      type: "boolean",
+      title: "Feature this event",
+      description: "Show this event in the large featured area on its website's Events page.",
+      group: "core",
+      initialValue: false,
+    },
+    {
       name: "heroImage",
       type: "image",
       title: "Cover image",
