@@ -16,6 +16,7 @@ export const ministries: Ministry[] = [
     short: "Youth Empowerment School",
     tagline: "Lead · Serve · Impact",
     accent: "teal",
+    externalUrl: "https://youthempowermentschool.live",
   },
   {
     slug: "empowerment-center-network",
@@ -40,7 +41,7 @@ export const ministries: Ministry[] = [
     short: "San Antonio Black White and Brown",
     tagline: "Community across color lines — one city, one calling.",
     accent: "indigo",
-    externalUrl: "https://www.sabwb.org",
+    externalUrl: "https://sabwb.org",
   },
   {
     slug: "sabwb-action",

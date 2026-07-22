@@ -8,7 +8,7 @@ export default function SABWB() {
       eyebrow="SABWB · San Antonio Black White and Brown"
       title="One city. One calling."
       lede="SABWB gathers San Antonio's Black, White, and Brown communities around the shared conviction that unity is a witness. Teaching, worship, presence — together, across color lines."
-      externalLink={{ label: "Visit sabwb.org", href: "https://www.sabwb.org" }}
+      externalLink={{ label: "Visit sabwb.org", href: "https://sabwb.org" }}
       primaryCta={{ label: "Get involved", href: "/contact" }}
       heroCaption="SABWB community photograph"
       stats={[

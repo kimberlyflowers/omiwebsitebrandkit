@@ -17,6 +17,7 @@ type Props = {
   eyebrow: string;
   title: string;
   lede: string;
+  externalLink?: { label: string; href: string };
   featured?: { title: string; body: string; caption?: string; cta?: { label: string; href: string } };
   items?: Item[];
   heroCaption?: string;
@@ -26,6 +27,7 @@ export default function GalleryPage({
   eyebrow,
   title,
   lede,
+  externalLink,
   featured,
   items,
   heroCaption = "Hero imagery",
@@ -64,6 +66,21 @@ export default function GalleryPage({
               <p className="mt-7 text-lg md:text-xl text-mist/85 leading-relaxed max-w-2xl">
                 {lede}
               </p>
+              {externalLink && (
+                <div className="mt-9">
+                  <a
+                    href={externalLink.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                  >
+                    {externalLink.label}
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="M5 3h6v6M11 3L4 10" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </section>
