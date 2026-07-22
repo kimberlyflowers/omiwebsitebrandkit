@@ -24,7 +24,7 @@
     "react-dom": "^18.3.1",
     "sanity": "^3.99.0",
     "simplex-noise": "^4.0.3",
-    "stripe": "^22.0.2",
+    "stripe": "^22.3.2",
     "styled-components": "^6.4.0",
     "three": "^0.169.0"
   },

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { stripe, hasStripeConfigured } from "@/lib/stripe";
-import { getEvent } from "@/lib/events";
+import { getEventBySlug } from "@/lib/eventSource";
 
 export const runtime = "nodejs";
 
@@ -40,7 +40,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
-  const event = getEvent(eventSlug);
+  // Resolve pricing from the same Sanity-backed source used by the public
+  // event page. The browser never gets to choose the authoritative amount.
+  const event = await getEventBySlug(eventSlug);
   if (!event) {
     return NextResponse.json({ error: "Event not found" }, { status: 404 });
   }
@@ -55,14 +57,17 @@ export async function POST(req: Request) {
 
   const qty = Math.max(1, Math.min(10, Math.floor(Number(quantity) || 1)));
 
+  const requestOrigin = req.headers.get("origin");
   const origin =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    req.headers.get("origin") ||
-    "https://omiwebsitebrandkit.vercel.app";
+    requestOrigin === "https://outpouringmissions.live" ||
+    requestOrigin === "https://www.outpouringmissions.live"
+      ? requestOrigin
+      : "https://outpouringmissions.live";
 
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
-    payment_method_types: ["card"],
+    integration_identifier: "omi_events_kfjqzvpt",
+    client_reference_id: event.slug,
     customer_email: attendee.email,
     line_items: [
       {

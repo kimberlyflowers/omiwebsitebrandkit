@@ -1,25 +1,41 @@
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import { getEvent } from "@/lib/events";
+import { getEventBySlug } from "@/lib/eventSource";
+import { stripe } from "@/lib/stripe";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const ev = getEvent(params.slug);
+  const ev = await getEventBySlug(params.slug);
   return { title: ev ? `You're registered — ${ev.title}` : "Registration complete" };
 }
 
-export default function Success({
+export default async function Success({
   params,
   searchParams,
 }: {
   params: { slug: string };
   searchParams: { session_id?: string };
 }) {
-  const event = getEvent(params.slug);
+  const event = await getEventBySlug(params.slug);
   if (!event) notFound();
+
+  const sessionId = searchParams.session_id;
+  let paymentConfirmed = false;
+
+  if (stripe && sessionId?.startsWith("cs_")) {
+    try {
+      const session = await stripe.checkout.sessions.retrieve(sessionId);
+      paymentConfirmed =
+        session.status === "complete" &&
+        (session.payment_status === "paid" || session.payment_status === "no_payment_required") &&
+        session.metadata?.eventSlug === event.slug;
+    } catch {
+      paymentConfirmed = false;
+    }
+  }
 
   return (
     <>
@@ -35,15 +51,24 @@ export default function Success({
             </div>
             <div className="eyebrow flex items-center justify-center gap-3 mb-5 text-gold-heritage">
               <span className="w-8 h-px bg-gold-heritage" />
-              You&apos;re in
+              {paymentConfirmed ? "You're in" : "Payment status"}
               <span className="w-8 h-px bg-gold-heritage" />
             </div>
             <h1 className="font-display font-black text-white text-4xl md:text-5xl leading-[1.1] tracking-tight">
-              Registration confirmed.
+              {paymentConfirmed ? "Registration confirmed." : "Payment not confirmed."}
             </h1>
             <p className="mt-6 text-lg text-mist/85 leading-relaxed">
-              Thanks for registering for <span className="text-white font-semibold">{event.title}</span>. A
-              confirmation email is on its way with your receipt and full event details.
+              {paymentConfirmed ? (
+                <>
+                  Thanks for registering for <span className="text-white font-semibold">{event.title}</span>.
+                  Your Stripe payment is confirmed.
+                </>
+              ) : (
+                <>
+                  We could not verify a completed Stripe payment for <span className="text-white font-semibold">{event.title}</span>.
+                  Please return to the event and try again.
+                </>
+              )}
             </p>
           </div>
         </section>
@@ -51,11 +76,14 @@ export default function Success({
         <section className="py-20">
           <div className="mx-auto max-w-2xl px-6">
             <div className="rounded-lg bg-white border border-mist shadow-omi-sm p-6 md:p-8">
-              <div className="eyebrow text-gold-heritage mb-3">What happens next</div>
-              <ul className="space-y-4 text-sm md:text-base text-graphite">
+              <div className="eyebrow text-gold-heritage mb-3">
+                {paymentConfirmed ? "What happens next" : "Next step"}
+              </div>
+              {paymentConfirmed ? (
+                <ul className="space-y-4 text-sm md:text-base text-graphite">
                 <li className="flex gap-3">
                   <span className="font-display font-black text-gold-heritage shrink-0">01</span>
-                  <span>Check your inbox. Your Stripe receipt and OMI confirmation arrive within a few minutes.</span>
+                  <span>Check your inbox for your Stripe receipt.</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="font-display font-black text-gold-heritage shrink-0">02</span>
@@ -65,7 +93,12 @@ export default function Success({
                   <span className="font-display font-black text-gold-heritage shrink-0">03</span>
                   <span>Watch for a logistics email two weeks before the event with venue, parking, and schedule details.</span>
                 </li>
-              </ul>
+                </ul>
+              ) : (
+                <p className="text-sm md:text-base text-graphite">
+                  No registration has been confirmed on this page. Return to the event to complete secure checkout.
+                </p>
+              )}
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href={`/events/${event.slug}`} className="btn btn-primary">
                   Back to event
@@ -77,9 +110,9 @@ export default function Success({
                   Back home
                 </Link>
               </div>
-              {searchParams.session_id && (
+              {paymentConfirmed && sessionId && (
                 <p className="mt-6 text-[11px] text-graphite/50 font-mono break-all">
-                  Session: {searchParams.session_id}
+                  Session: {sessionId}
                 </p>
               )}
             </div>

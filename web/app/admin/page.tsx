@@ -16,10 +16,11 @@ const TOOLS = [
     status: "Live" as const,
   },
   {
-    href: "#",
+    href: "https://dashboard.stripe.com/payments",
     title: "Registrations",
-    desc: "Event registration list, payment status, attendee notes. Powered by Stripe.",
-    status: "Coming soon" as const,
+    desc: "Review paid registrations, payment status, and attendee metadata in Stripe.",
+    status: "Live" as const,
+    external: true,
   },
   {
     href: "#",
@@ -65,6 +66,8 @@ export default function AdminIndex() {
                   isLive ? (
                     <Link
                       href={t.href}
+                      target={"external" in t && t.external ? "_blank" : undefined}
+                      rel={"external" in t && t.external ? "noopener noreferrer" : undefined}
                       className="group block rounded-lg bg-white border border-mist shadow-omi-sm hover:shadow-omi-lg hover:border-gold-heritage/40 hover:-translate-y-1 transition-all duration-500 p-8"
                     >
                       {children}
