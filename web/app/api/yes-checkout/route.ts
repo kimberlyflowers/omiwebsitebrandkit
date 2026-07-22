@@ -48,6 +48,12 @@ export async function POST(req: Request) {
       const session = await stripe.checkout.sessions.create({
         ui_mode: "embedded_page",
         mode: recurring ? "subscription" : "payment",
+        branding_settings: {
+          background_color: "#ffffff",
+          button_color: "#000000",
+          border_style: "rounded",
+          display_name: "Youth Empowerment School",
+        },
         integration_identifier: "yes_donations_qmtzafke",
         customer_email: body.email || undefined,
         line_items: [{ quantity: 1, price_data: { currency: "usd", unit_amount: amount, recurring, product_data: { name: "Youth Empowerment School Scholarship Fund" } } }],
@@ -65,6 +71,12 @@ export async function POST(req: Request) {
     const session = await stripe.checkout.sessions.create({
       ui_mode: "embedded_page",
       mode: "payment",
+      branding_settings: {
+        background_color: "#ffffff",
+        button_color: "#000000",
+        border_style: "rounded",
+        display_name: "Youth Empowerment School",
+      },
       integration_identifier: "yes_events_brvnshke",
       client_reference_id: event.slug,
       line_items: [{ quantity, price_data: { currency: "usd", unit_amount: tier.priceCents, product_data: { name: `${event.title} · ${tier.label}`, description: tier.description || undefined } } }],
