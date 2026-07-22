@@ -16,7 +16,7 @@ export const ministries: Ministry[] = [
     short: "Youth Empowerment School",
     tagline: "Lead · Serve · Impact",
     accent: "teal",
-    externalUrl: "https://youthempowerment.live",
+    externalUrl: "https://youthempowermentschool.live",
   },
   {
     slug: "empowerment-center-network",
