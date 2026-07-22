@@ -78,12 +78,12 @@ export default function EventPage({ event: e }: Props) {
       <main className="bg-offwhite text-indigo-deep">
         {/* ---------------- COVER ---------------- */}
         <section className="relative bg-indigo-deep pt-24 pb-0 overflow-hidden">
-          <div className="relative aspect-[21/9] w-full max-h-[520px] overflow-hidden">
+          <div className="relative h-[360px] w-full overflow-hidden md:h-[520px]">
             {e.heroImage ? (
               <img
                 src={e.heroImage}
                 alt={e.title}
-                className="absolute inset-0 w-full h-full object-cover opacity-70"
+                className="absolute inset-0 block h-full w-full object-cover opacity-70"
               />
             ) : (
               <div className="absolute inset-0 p-6">

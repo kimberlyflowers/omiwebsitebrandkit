@@ -8,13 +8,6 @@ type Body = {
   eventSlug: string;
   tierLabel: string;
   quantity: number;
-  attendee: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone?: string;
-    notes?: string;
-  };
 };
 
 export async function POST(req: Request) {
@@ -35,8 +28,8 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
-  const { eventSlug, tierLabel, quantity, attendee } = body ?? {};
-  if (!eventSlug || !tierLabel || !attendee?.email) {
+  const { eventSlug, tierLabel, quantity } = body ?? {};
+  if (!eventSlug || !tierLabel) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
@@ -65,10 +58,10 @@ export async function POST(req: Request) {
       : "https://outpouringmissions.live";
 
   const session = await stripe.checkout.sessions.create({
+    ui_mode: "embedded_page",
     mode: "payment",
     integration_identifier: "omi_events_kfjqzvpt",
     client_reference_id: event.slug,
-    customer_email: attendee.email,
     line_items: [
       {
         quantity: qty,
@@ -85,17 +78,18 @@ export async function POST(req: Request) {
     ],
     metadata: {
       eventSlug: event.slug,
+      eventTitle: event.title,
+      site: "omi",
       tierLabel: tier.label,
       quantity: String(qty),
-      firstName: attendee.firstName ?? "",
-      lastName: attendee.lastName ?? "",
-      phone: attendee.phone ?? "",
-      notes: attendee.notes ?? "",
     },
-    success_url: `${origin}/events/${event.slug}/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${origin}/events/${event.slug}`,
+    phone_number_collection: { enabled: true },
+    return_url: `${origin}/events/${event.slug}/success?session_id={CHECKOUT_SESSION_ID}`,
     allow_promotion_codes: true,
   });
 
-  return NextResponse.json({ url: session.url });
+  return NextResponse.json({
+    clientSecret: session.client_secret,
+    publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+  });
 }
