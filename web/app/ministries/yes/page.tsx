@@ -8,7 +8,7 @@ export default function YES() {
       eyebrow="YES · Youth Empowerment School"
       title="Lead. Serve. Rise."
       lede="YES is where the next generation is formed into servant-leaders ready for the moment. Faith, voice, and vision — cultivated together, year-round, across age groups."
-      externalLink={{ label: "Visit Youth Empowerment School", href: "https://youthempowermentschool.live" }}
+      externalLink={{ label: "Visit Youth Empowerment School", href: "https://youthempowerment.live" }}
       heroCaption="YES students in action"
       featured={{
         title: "YES Rise Up — the summer cohort",
