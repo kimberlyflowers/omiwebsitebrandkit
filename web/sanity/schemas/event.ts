@@ -14,6 +14,22 @@ export default defineType({
   fields: [
     { name: "title", type: "string", title: "Title", group: "core", validation: (r) => r.required() },
     {
+      name: "site",
+      type: "string",
+      title: "Website",
+      description: "Choose which website should publish this event.",
+      group: "core",
+      options: {
+        list: [
+          { title: "Outpouring Missions International", value: "omi" },
+          { title: "Youth Empowerment School", value: "yes" },
+        ],
+        layout: "radio",
+      },
+      validation: (r) => r.required(),
+      initialValue: "omi",
+    },
+    {
       name: "slug",
       type: "slug",
       title: "URL slug",

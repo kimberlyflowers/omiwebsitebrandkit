@@ -34,7 +34,7 @@ export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][
    Events
    ------------------------------------------------------------ */
 
-export const eventsListQuery = groq`*[_type == "event"] | order(startDate asc) {
+export const eventsListQuery = groq`*[_type == "event" && coalesce(site, "omi") == "omi"] | order(startDate asc) {
   _id,
   title,
   "slug": slug.current,
@@ -48,7 +48,7 @@ export const eventsListQuery = groq`*[_type == "event"] | order(startDate asc) {
   priceTiers[] { label, priceCents, description, soldOut }
 }`;
 
-export const eventBySlugQuery = groq`*[_type == "event" && slug.current == $slug][0] {
+export const eventBySlugQuery = groq`*[_type == "event" && coalesce(site, "omi") == "omi" && slug.current == $slug][0] {
   _id,
   title,
   "slug": slug.current,
