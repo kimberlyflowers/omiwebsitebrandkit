@@ -23,6 +23,7 @@ export default defineType({
         list: [
           { title: "Outpouring Missions International", value: "omi" },
           { title: "Youth Empowerment School", value: "yes" },
+          { title: "SABWB", value: "sabwb" },
         ],
         layout: "radio",
       },
