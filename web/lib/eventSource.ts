@@ -42,9 +42,10 @@ function formatTime(iso: string): string {
 }
 
 function normalize(ev: SanityEvent): EventDetail {
+  const fallback = staticEvents.find((event) => event.slug === ev.slug);
   const heroUrl = ev.heroImage
     ? urlFor(ev.heroImage as object)?.width(2400).height(1200).fit("crop").auto("format").url()
-    : undefined;
+    : fallback?.heroImage;
 
   return {
     slug: ev.slug,
@@ -57,27 +58,27 @@ function normalize(ev: SanityEvent): EventDetail {
     endTime: ev.endDate ? formatTime(ev.endDate) : undefined,
     timezone: ev.timezone,
     location: {
-      name: ev.location?.name ?? "TBA",
-      address: ev.location?.address,
-      city: ev.location?.city,
+      name: ev.location?.name ?? fallback?.location.name ?? "TBA",
+      address: ev.location?.address ?? fallback?.location.address,
+      city: ev.location?.city ?? fallback?.location.city,
     },
-    priceTiers: (ev.priceTiers ?? []).map((t) => ({
+    priceTiers: (ev.priceTiers?.length ? ev.priceTiers : fallback?.priceTiers ?? []).map((t) => ({
       label: t.label,
       price: t.priceCents === 0 ? "Free" : `$${(t.priceCents / 100).toFixed(0)}`,
       priceCents: t.priceCents,
       description: t.description,
       soldOut: t.soldOut,
     })),
-    about: ev.about ?? [],
-    agenda: ev.agenda,
-    speakers: (ev.speakers ?? []).map((s) => ({
+    about: ev.about?.length ? ev.about : fallback?.about ?? [],
+    agenda: ev.agenda?.length ? ev.agenda : fallback?.agenda,
+    speakers: ev.speakers?.length ? ev.speakers.map((s) => ({
       name: s.name,
       role: s.role,
       caption: s.role ?? "Speaker headshot",
-    })),
-    faq: ev.faq,
+    })) : fallback?.speakers,
+    faq: ev.faq?.length ? ev.faq : fallback?.faq,
     heroImage: heroUrl,
-    coverCaption: "Event cover photograph",
+    coverCaption: fallback?.coverCaption ?? "Event cover photograph",
   };
 }
 
