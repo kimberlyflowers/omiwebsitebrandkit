@@ -22,9 +22,24 @@ export default function DonationPopup() {
       if (monthly) setFrequency("monthly");
       setOpen(shouldOpen);
     }
+    function openFromLink(event: MouseEvent) {
+      const target = event.target instanceof Element
+        ? event.target.closest<HTMLAnchorElement>('a[href="#give"], a[href="#give-monthly"]')
+        : null;
+      if (!target) return;
+      event.preventDefault();
+      const monthly = target.getAttribute("href") === "#give-monthly";
+      setFrequency(monthly ? "monthly" : "one-time");
+      setOpen(true);
+      window.history.replaceState(null, "", monthly ? "#give-monthly" : "#give");
+    }
     syncFromHash();
     window.addEventListener("hashchange", syncFromHash);
-    return () => window.removeEventListener("hashchange", syncFromHash);
+    document.addEventListener("click", openFromLink);
+    return () => {
+      window.removeEventListener("hashchange", syncFromHash);
+      document.removeEventListener("click", openFromLink);
+    };
   }, []);
 
   useEffect(() => {
