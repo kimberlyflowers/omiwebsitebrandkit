@@ -38,7 +38,7 @@ export default async function HomePage() {
           headline={cms?.heroHeadline}
           script={cms?.heroScript}
           lede={cms?.heroLede}
-          primaryCta={cta(cms?.heroPrimaryCta, { label: "Join the Next Conference", href: "/conference" })}
+          primaryCta={cta(cms?.heroPrimaryCta, { label: "Join the Next Conference - Updated", href: "/conference" })}
           secondaryCta={cta(cms?.heroSecondaryCta, { label: "Our Mission", href: "/about" })}
           bannerOverride={heroBannerUrl}
           videoOverride={cms?.heroVideoUrl}
