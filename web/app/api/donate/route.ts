@@ -25,7 +25,6 @@ export async function POST(req: Request) {
     const session = await stripe.checkout.sessions.create({
       ui_mode: "elements",
       mode: recurring ? "subscription" : "payment",
-      submit_type: "donate",
       integration_identifier: "omi_giving_wqjxnrta",
       line_items: [{
         quantity: 1,
