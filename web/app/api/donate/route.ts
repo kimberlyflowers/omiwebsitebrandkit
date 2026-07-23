@@ -23,19 +23,8 @@ export async function POST(req: Request) {
     const recurring = frequency === "monthly" ? { interval: "month" as const } : undefined;
 
     const session = await stripe.checkout.sessions.create({
-      ui_mode: "embedded_page",
+      ui_mode: "elements",
       mode: recurring ? "subscription" : "payment",
-    payment_method_types: ["card"],
-    wallet_options: {
-      link: { display: "never" },
-    },
-      branding_settings: {
-        background_color: "#ffffff",
-        button_color: "#000000",
-        border_style: "rounded",
-        display_name: "Outpouring Missions International",
-        font_family: "inter",
-      },
       submit_type: "donate",
       integration_identifier: "omi_giving_wqjxnrta",
       line_items: [{
@@ -46,12 +35,6 @@ export async function POST(req: Request) {
           recurring,
           product_data: { name: frequency === "monthly" ? "OMI Monthly Partnership" : "Gift to Outpouring Missions International" },
         },
-      }],
-      custom_fields: [{
-        key: "donor_name",
-        label: { type: "custom", custom: "Donor name" },
-        type: "text",
-        optional: false,
       }],
       metadata: { site: "omi", source: "omi-give-page", purpose: "general-donation", frequency },
       return_url: `${origin}/give?donation=complete&session_id={CHECKOUT_SESSION_ID}`,
