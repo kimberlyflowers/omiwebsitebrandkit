@@ -5,7 +5,7 @@ The source of truth for OMI's identity: colors, typography, logo rules, voice, a
 **Parent brand:** Outpouring Missions International (OMI)
 **Sub-brands:** YES (Youth Empowerment School) · YES Rise Up
 **Established:** 2008
-**Tagline:** *Transforming Lives. Igniting Futures.*
+**Tagline:** *Transforming Lives. Igniting Futures. With AI.*
 
 ---
 
@@ -46,7 +46,7 @@ The source of truth for OMI's identity: colors, typography, logo rules, voice, a
 
 ## Typography
 
-> The reference board was an AI-generated composite, so its letterforms aren't a licensed typeface. These are the closest free, production-ready matches.
+> The reference board was an AI-generated composite, so its letterforms aren\'t a licensed typeface. These are the closest free, production-ready matches.
 
 | Role | Font | Matches in reference |
 |---|---|---|
